@@ -43,17 +43,17 @@ void MainWindow::setChooseMethodGrid()
 {
 	choseWorkModeLabel.set_text("Choose work mode: ");
 
-	doDecription.set_label("Decription");
+	doDecoding.set_label("Decription");
 	doEncoding.set_label("Encoding");
 
-	doDecription.join_group(doEncoding);
+	doDecoding.join_group(doEncoding);
 	doEncoding.set_active();
 
 	chooseMethodGrid.set_row_spacing(3);
 
 	chooseMethodGrid.attach(choseWorkModeLabel, 0,0,1,1);
 	chooseMethodGrid.attach_next_to(doEncoding, choseWorkModeLabel,Gtk::PositionType::POS_BOTTOM ,1,1);
-	chooseMethodGrid.attach_next_to(doDecription, doEncoding,Gtk::PositionType::POS_BOTTOM ,1,1);
+	chooseMethodGrid.attach_next_to(doDecoding, doEncoding,Gtk::PositionType::POS_BOTTOM ,1,1);
 }
 
 void MainWindow::setEntry()

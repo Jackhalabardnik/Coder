@@ -27,11 +27,13 @@ private:
 
 	void setWindow();
 
+protected:
+
 	Gtk::Button startButton, exitButton;
 
-	Gtk::Label outputLabel, outputEntryLabel, codeEntryLabel, textEntryLabel, chooseInputLabel, choseWorkModeLabel;
+	Gtk::Label outputEntryLabel, codeEntryLabel, textEntryLabel, chooseInputLabel, choseWorkModeLabel;
 
-	Gtk::RadioButton doEncoding, doDecription, readFromEntry, readFromFile;
+	Gtk::RadioButton doEncoding, doDecoding, readFromEntry, readFromFile;
 
 	Gtk::Entry codeEntry, textEntry, outputEntry;
 

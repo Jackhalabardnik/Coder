@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="Coder" Database="" Version="10.0.0">
-  <Project Name="Coder" Path="Coder/Coder.project" Active="Yes"/>
-  <Project Name="TestCoder" Path="TestCoder/TestCoder.project" Active="No"/>
+  <Project Name="Coder" Path="Coder/Coder.project" Active="No"/>
+  <Project Name="TestCoder" Path="TestCoder/TestCoder.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="no">
       <Environment/>
       <Project Name="Coder" ConfigName="Debug"/>
+      <Project Name="Coder" ConfigName="Debug"/>
+      <Project Name="TestCoder" ConfigName="Debug"/>
       <Project Name="TestCoder" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
-      <Project Name="TestCoder" ConfigName="Release"/>
       <Project Name="Coder" ConfigName="Release"/>
+      <Project Name="Coder" ConfigName="Release"/>
+      <Project Name="TestCoder" ConfigName="Release"/>
+      <Project Name="TestCoder" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
