@@ -42,8 +42,11 @@ void MainWindow::setChooseMethodGrid()
 {
 	choseWorkModeLabel.set_text("Choose work mode: ");
 
-	doDecoding.set_label("Decription");
+	doDecoding.set_label("Decoding");
 	doEncoding.set_label("Encoding");
+
+	doDecoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::changeLabelsToDecodingMode));
+	doEncoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::changeLabelsToEncodingMode));
 
 	doDecoding.join_group(doEncoding);
 	doEncoding.set_active();
@@ -57,7 +60,7 @@ void MainWindow::setChooseMethodGrid()
 
 void MainWindow::setEntry()
 {
-		codeEntry.set_text("public key");
+		codeEntry.set_text("key");
 		textEntry.set_text("text");
 
 		codeEntryLabel.set_text("Enter your public key:"); 
@@ -103,11 +106,25 @@ void MainWindow::fillMainGrid()
 
 		mainGrid.attach(exitButton, 2, 9, 4,1);
 	}
-
+	
 void MainWindow::setWindow()
 {
 	set_border_width(10);
 	set_resizable(false);
-	set_title("Coder v1.0.0");
+	set_title("Coder v1.0.1");
 	show_all_children();
+}
+
+void MainWindow::changeLabelsToDecodingMode()
+{
+	codeEntryLabel.set_text("Enter your private key:"); 
+	textEntryLabel.set_text("Enter text to decode:");
+	outputEntryLabel.set_text("Decoded text:");
+}
+
+void MainWindow::changeLabelsToEncodingMode()
+{
+	codeEntryLabel.set_text("Enter your public key:"); 
+	textEntryLabel.set_text("Enter text to encode:");
+	outputEntryLabel.set_text("Encoded text:");
 }

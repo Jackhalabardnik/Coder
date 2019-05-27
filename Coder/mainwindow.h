@@ -27,6 +27,8 @@ private:
 
 	void setWindow();
 
+	void changeLabelsToDecodingMode();
+	void changeLabelsToEncodingMode();
 protected:
 
 	Gtk::Button startButton, exitButton;

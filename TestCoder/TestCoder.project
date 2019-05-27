@@ -64,6 +64,7 @@
     <Configuration Name="Release" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-O2;-std=c++14;-std=c++11;-Wall;$(shell pkg-config --cflags gtkmm-3.0)" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="/home/jacek/CLP/Coder"/>
+        <IncludePath Value="/home/jacek/CLP/CoderRepo/"/>
         <Preprocessor Value="NDEBUG"/>
       </Compiler>
       <Linker Options="$(shell pkg-config --libs gtkmm-3.0)" Required="yes"/>
