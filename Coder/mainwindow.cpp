@@ -5,7 +5,6 @@ MainWindow::MainWindow()
 {
 	setGUI();
 }
-
 void MainWindow::setGUI()
 	{
 		setChooseMethodGrid();
@@ -62,7 +61,7 @@ void MainWindow::setEntry()
 		textEntry.set_text("text");
 
 		codeEntryLabel.set_text("Enter your public key:"); 
-		textEntryLabel.set_text("Enter text to encrypt:");
+		textEntryLabel.set_text("Enter text to encode:");
 }
 
 void MainWindow::setOutInfo()

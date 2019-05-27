@@ -8,8 +8,8 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="main.cpp"/>
     <File Name="mainwindowtests.cpp"/>
+    <File Name="CatchMain.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -63,8 +63,7 @@
     </Configuration>
     <Configuration Name="Release" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-O2;-std=c++14;-std=c++11;-Wall;$(shell pkg-config --cflags gtkmm-3.0)" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
-        <IncludePath Value="."/>
-        <IncludePath Value="/home/jacek/CLP/Coder/CoderRepo/Coder"/>
+        <IncludePath Value="/home/jacek/CLP/Coder"/>
         <Preprocessor Value="NDEBUG"/>
       </Compiler>
       <Linker Options="$(shell pkg-config --libs gtkmm-3.0)" Required="yes"/>

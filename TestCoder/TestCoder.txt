@@ -1,0 +1,1 @@
+./Release/mainwindowtests.cpp.o ./Release/CatchMain.cpp.o

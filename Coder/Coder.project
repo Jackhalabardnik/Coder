@@ -11,7 +11,7 @@
     <File Name="mainwindow.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
-    <File Name="mainwindow.cpp"/>
+    <File Name="mainwindow.cpp" ExcludeProjConfig=""/>
     <File Name="main.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
