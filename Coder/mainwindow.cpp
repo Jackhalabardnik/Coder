@@ -26,6 +26,9 @@ void MainWindow::setChooseInputGrid()
 
 	readFromFile.set_label("readFromFile");
 	readFromEntry.set_label("readFromEntry");
+	
+	readFromEntry.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::changeLabelsToEntryInputMode));
+	readFromFile.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::changeLabelsToFileInputMode));
 
 	readFromFile.join_group(readFromEntry);
 	readFromEntry.set_active();
@@ -62,15 +65,10 @@ void MainWindow::setEntry()
 {
 		codeEntry.set_text("key");
 		textEntry.set_text("text");
-
-		codeEntryLabel.set_text("Enter your public key:"); 
-		textEntryLabel.set_text("Enter text to encode:");
 }
 
 void MainWindow::setOutInfo()
 {
-	outputEntryLabel.set_text("Encoded text:"); 
-
 	outputEntry.set_text("Nothing here");
 	outputEntry.set_editable(false);
 }
@@ -127,4 +125,14 @@ void MainWindow::changeLabelsToEncodingMode()
 	codeEntryLabel.set_text("Enter your public key:"); 
 	textEntryLabel.set_text("Enter text to encode:");
 	outputEntryLabel.set_text("Encoded text:");
+}
+
+void MainWindow::changeLabelsToFileInputMode()
+{
+	textEntryLabel.set_text("Enter path to file to encode:");
+}
+
+void MainWindow::changeLabelsToEntryInputMode()
+{
+	textEntryLabel.set_text("Enter text to encode:");
 }

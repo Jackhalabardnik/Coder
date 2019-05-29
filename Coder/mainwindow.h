@@ -29,6 +29,9 @@ private:
 
 	void changeLabelsToDecodingMode();
 	void changeLabelsToEncodingMode();
+	
+	void changeLabelsToFileInputMode();
+	void changeLabelsToEntryInputMode();
 protected:
 
 	Gtk::Button startButton, exitButton;

@@ -13,6 +13,17 @@ public:
 	{
 		doEncoding.set_active();
 	}
+	
+	void setEntryInputMode()
+	{
+		readFromEntry.set_active();
+	}
+	
+	void setFileInputMode()
+	{
+		readFromFile.set_active();
+	}
+	
 	std::string getKeyEntryLabelText()
 	{
 		return codeEntryLabel.get_text();
@@ -27,9 +38,9 @@ public:
 	}
 };
 
+Glib::RefPtr<Gtk::Application> app = Gtk::Application::create("I have to add this in order to make gtkmm going");
 
 TEST_CASE( "MainWindow sets labels to decode method after choosing decode method", "[MainWindowTests]" ) {
-	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create("I have to add this in order to make gtkmm going");
 	MockWindow window;
 	window.setDecodingMode();
     ( window.getKeyEntryLabelText() == "Enter your private key:" );
@@ -37,12 +48,25 @@ TEST_CASE( "MainWindow sets labels to decode method after choosing decode method
 	CHECK( window.getOutputEntryLabelText() == "Decoded text:" );
 }
 
-TEST_CASE( "MainWindow sets labels to decode method after choosing firstly decode, secondly encode method", "[MainWindowTests]" ) {
-	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create("I have to add this in order to make gtkmm going");
+TEST_CASE( "MainWindow sets labels to decode method after choosing encode method", "[MainWindowTests]" ) {
 	MockWindow window;
 	window.setDecodingMode();
 	window.setEncodingMode();
 	CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
 	CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
 	CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
+}
+
+TEST_CASE( "MainWindow sets inputTextLabel to text input after choosing readFromEntry radio button", "[MainWindowTests]" ) {
+	MockWindow window;
+	window.setFileInputMode();
+	window.setEntryInputMode();
+	CHECK(window.getTextEntryLabelText() == "Enter text to encode:");
+}
+
+TEST_CASE( "MainWindow sets inputTextLabel to file input after choosing readFromFile radio button", "[MainWindowTests]" ) {
+	MockWindow window;
+	window.setEntryInputMode();
+	window.setFileInputMode();
+	CHECK(window.getTextEntryLabelText() == "Enter path to file to encode:");
 }
