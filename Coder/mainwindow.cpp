@@ -63,12 +63,16 @@ void MainWindow::setChooseMethodGrid()
 
 void MainWindow::setEntry()
 {
+	codeEntryLabel.set_text("Enter your public key:"); 
+	textEntryLabel.set_text("Enter text to encode:");
+	
 		codeEntry.set_text("key");
 		textEntry.set_text("text");
 }
 
 void MainWindow::setOutInfo()
 {
+	outputEntryLabel.set_text("Encoded text:");
 	outputEntry.set_text("Nothing here");
 	outputEntry.set_editable(false);
 }

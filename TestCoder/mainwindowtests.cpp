@@ -40,21 +40,29 @@ public:
 
 Glib::RefPtr<Gtk::Application> app = Gtk::Application::create("I have to add this in order to make gtkmm going");
 
-TEST_CASE( "MainWindow sets labels to decode method after choosing decode method", "[MainWindowTests]" ) {
+TEST_CASE("MainWindow sets labels by defualt to EntryInput-Encoding mode","[MainWindowTests]")
+{
 	MockWindow window;
-	window.setDecodingMode();
-    ( window.getKeyEntryLabelText() == "Enter your private key:" );
-	CHECK( window.getTextEntryLabelText() == "Enter text to decode:" );
-	CHECK( window.getOutputEntryLabelText() == "Decoded text:" );
-}
-
-TEST_CASE( "MainWindow sets labels to decode method after choosing encode method", "[MainWindowTests]" ) {
-	MockWindow window;
-	window.setDecodingMode();
-	window.setEncodingMode();
-	CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
+    CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
 	CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
 	CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
+}
+
+TEST_CASE( "MainWindow sets labels to encode method", "[MainWindowTests]" ) 
+{
+	MockWindow window;
+	window.setEncodingMode();
+    CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
+	CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
+	CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
+}
+
+TEST_CASE( "MainWindow sets labels to decode method", "[MainWindowTests]" ) {
+	MockWindow window;
+	window.setDecodingMode();
+	CHECK( window.getKeyEntryLabelText() == "Enter your private key:" );
+	CHECK( window.getTextEntryLabelText() == "Enter text to decode:" );
+	CHECK( window.getOutputEntryLabelText() == "Decoded text:" );
 }
 
 TEST_CASE( "MainWindow sets inputTextLabel to text input after choosing readFromEntry radio button", "[MainWindowTests]" ) {
