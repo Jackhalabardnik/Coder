@@ -60,7 +60,7 @@ AS       := /usr/bin/i686-linux-gnu-as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/mainwindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/mainwindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/EntryInput.cpp$(ObjectSuffix) 
 
 
 
@@ -106,6 +106,14 @@ $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 
 $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
+
+$(IntermediateDirectory)/EntryInput.cpp$(ObjectSuffix): EntryInput.cpp $(IntermediateDirectory)/EntryInput.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/EntryInput.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/EntryInput.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/EntryInput.cpp$(DependSuffix): EntryInput.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/EntryInput.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/EntryInput.cpp$(DependSuffix) -MM EntryInput.cpp
+
+$(IntermediateDirectory)/EntryInput.cpp$(PreprocessSuffix): EntryInput.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/EntryInput.cpp$(PreprocessSuffix) EntryInput.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

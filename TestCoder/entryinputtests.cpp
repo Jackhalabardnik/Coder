@@ -2,29 +2,26 @@
 #include <Coder/InputInterferance.h>
 #include <Coder/EntryInput.cpp>
 
-TEST_CASE("Entry Input returns false state without set text","[EntryInputTests]")
+TEST_CASE("Basic workflow works","[EntryInputTests]")
 {
 	EntryInput input;
-	CHECK(input.isInputGood() == false);
-}
-
-TEST_CASE("Entry Input returns true state with set good text","[EntryInputTests]")
-{
-	EntryInput input;
+	SECTION("Entry Input returnes false with no set text")
+	{
+		CHECK(input.isInputGood() == false);
+	}
 	input.setText("Text");
-	CHECK(input.isInputGood() == true);
-}
-
-TEST_CASE("Entry Input returns false state with set no text","[EntryInputTests]")
-{
-	EntryInput input;
+	SECTION("Entry Input returnes true with set text")
+	{
+		CHECK(input.isInputGood() == true);
+	}
 	input.setText("");
-	CHECK(input.isInputGood() == false);
-}
-
-TEST_CASE("Entry Input returns set text","[EntryInputTests]")
-{
-	EntryInput input;
+	SECTION("Entry Input returnes false with set empty text")
+	{
+		CHECK(input.isInputGood() == false);
+	}
 	input.setText("Text");
-	CHECK(input.getText() == "Text");
+	SECTION("Entry Input returns set text")
+	{
+		CHECK(input.getText() == "Text");
+	}
 }
