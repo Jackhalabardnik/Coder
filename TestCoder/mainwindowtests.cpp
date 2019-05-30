@@ -68,13 +68,13 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" ) {
 	window.setFileInputMode();
 	SECTION("MainWindow changes textEntry label to file input in encoding mode")
 	{
-		CHECK(window.getTextEntryLabelText() == "Enter path to file to encode:");
+		CHECK(window.getTextEntryLabelText() == "Enter non-relative path to file to encode:");
 	}
 	
 	window.setDecodingMode();
 	SECTION("MainWindow changes textEntry label to file input in decoding mode")
 	{
-		CHECK(window.getTextEntryLabelText() == "Enter path to file to decode:");
+		CHECK(window.getTextEntryLabelText() == "Enter non-relative path to file to decode:");
 	}
 	
 	window.setEntryInputMode();

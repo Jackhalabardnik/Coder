@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/fileinputtests.cpp$(ObjectSuffix) 
 
 
 
@@ -114,6 +114,14 @@ $(IntermediateDirectory)/entryinputtests.cpp$(DependSuffix): entryinputtests.cpp
 
 $(IntermediateDirectory)/entryinputtests.cpp$(PreprocessSuffix): entryinputtests.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/entryinputtests.cpp$(PreprocessSuffix) entryinputtests.cpp
+
+$(IntermediateDirectory)/fileinputtests.cpp$(ObjectSuffix): fileinputtests.cpp $(IntermediateDirectory)/fileinputtests.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/TestCoder/fileinputtests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/fileinputtests.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/fileinputtests.cpp$(DependSuffix): fileinputtests.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/fileinputtests.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/fileinputtests.cpp$(DependSuffix) -MM fileinputtests.cpp
+
+$(IntermediateDirectory)/fileinputtests.cpp$(PreprocessSuffix): fileinputtests.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/fileinputtests.cpp$(PreprocessSuffix) fileinputtests.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

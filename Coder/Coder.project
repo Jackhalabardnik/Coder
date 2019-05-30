@@ -11,11 +11,13 @@
     <File Name="mainwindow.h"/>
     <File Name="InputInterferance.h"/>
     <File Name="EntryInput.h"/>
+    <File Name="FileInput.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="mainwindow.cpp" ExcludeProjConfig=""/>
     <File Name="main.cpp"/>
     <File Name="EntryInput.cpp"/>
+    <File Name="FileInput.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

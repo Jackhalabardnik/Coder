@@ -118,7 +118,7 @@ void MainWindow::setWindow()
 
 void MainWindow::updateLabels()
 {
-	std::string input_text = readFromEntry.get_active() ? "text" : "path to file";
+	std::string input_text = readFromEntry.get_active() ? "text" : "non-relative path to file";
 	if(doEncoding.get_active())
 	{
 		codeEntryLabel.set_text("Enter your public key:"); 
