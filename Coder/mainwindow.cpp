@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include <iostream>
 
 MainWindow::MainWindow() 
 {
@@ -27,8 +26,8 @@ void MainWindow::setChooseInputGrid()
 	readFromFile.set_label("readFromFile");
 	readFromEntry.set_label("readFromEntry");
 	
-	readFromEntry.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::changeLabelsToEntryInputMode));
-	readFromFile.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::changeLabelsToFileInputMode));
+	readFromEntry.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateLabels));
+	readFromFile.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateLabels));
 
 	readFromFile.join_group(readFromEntry);
 	readFromEntry.set_active();
@@ -48,8 +47,8 @@ void MainWindow::setChooseMethodGrid()
 	doDecoding.set_label("Decoding");
 	doEncoding.set_label("Encoding");
 
-	doDecoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::changeLabelsToDecodingMode));
-	doEncoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::changeLabelsToEncodingMode));
+	doDecoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateLabels));
+	doEncoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateLabels));
 
 	doDecoding.join_group(doEncoding);
 	doEncoding.set_active();
@@ -117,26 +116,19 @@ void MainWindow::setWindow()
 	show_all_children();
 }
 
-void MainWindow::changeLabelsToDecodingMode()
+void MainWindow::updateLabels()
 {
-	codeEntryLabel.set_text("Enter your private key:"); 
-	textEntryLabel.set_text("Enter text to decode:");
-	outputEntryLabel.set_text("Decoded text:");
-}
-
-void MainWindow::changeLabelsToEncodingMode()
-{
-	codeEntryLabel.set_text("Enter your public key:"); 
-	textEntryLabel.set_text("Enter text to encode:");
-	outputEntryLabel.set_text("Encoded text:");
-}
-
-void MainWindow::changeLabelsToFileInputMode()
-{
-	textEntryLabel.set_text("Enter path to file to encode:");
-}
-
-void MainWindow::changeLabelsToEntryInputMode()
-{
-	textEntryLabel.set_text("Enter text to encode:");
+	std::string input_text = readFromEntry.get_active() ? "text" : "path to file";
+	if(doEncoding.get_active())
+	{
+		codeEntryLabel.set_text("Enter your public key:"); 
+		textEntryLabel.set_text(std::string("Enter " + input_text + " to encode:"));
+		outputEntryLabel.set_text("Encoded text:");
+	}
+	else
+	{
+		codeEntryLabel.set_text("Enter your private key:"); 
+		textEntryLabel.set_text(std::string("Enter " + input_text + " to decode:"));
+		outputEntryLabel.set_text("Decoded text:");
+	}
 }

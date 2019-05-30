@@ -40,41 +40,52 @@ public:
 
 Glib::RefPtr<Gtk::Application> app = Gtk::Application::create("I have to add this in order to make gtkmm going");
 
-TEST_CASE("MainWindow sets labels by defualt to EntryInput-Encoding mode","[MainWindowTests]")
-{
+TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" ) {
 	MockWindow window;
-    CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
-	CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
-	CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
-}
-
-TEST_CASE( "MainWindow sets labels to encode method", "[MainWindowTests]" ) 
-{
-	MockWindow window;
-	window.setEncodingMode();
-    CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
-	CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
-	CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
-}
-
-TEST_CASE( "MainWindow sets labels to decode method", "[MainWindowTests]" ) {
-	MockWindow window;
+	SECTION("MainWindow sets labels by defualt to EntryInput-Encoding mode")
+	{
+		CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
+		CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
+		CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
+	}
+	
 	window.setDecodingMode();
-	CHECK( window.getKeyEntryLabelText() == "Enter your private key:" );
-	CHECK( window.getTextEntryLabelText() == "Enter text to decode:" );
-	CHECK( window.getOutputEntryLabelText() == "Decoded text:" );
-}
-
-TEST_CASE( "MainWindow sets inputTextLabel to text input after choosing readFromEntry radio button", "[MainWindowTests]" ) {
-	MockWindow window;
+	SECTION("MainWindow sets labels to decode method")
+	{
+		CHECK( window.getKeyEntryLabelText() == "Enter your private key:" );
+		CHECK( window.getTextEntryLabelText() == "Enter text to decode:" );
+		CHECK( window.getOutputEntryLabelText() == "Decoded text:" );
+	}
+	
+	window.setEncodingMode();
+	SECTION("MainWindow could set labels back to encoding mode")
+	{
+		CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
+		CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
+		CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
+	}
+	
 	window.setFileInputMode();
+	SECTION("MainWindow changes textEntry label to file input in encoding mode")
+	{
+		CHECK(window.getTextEntryLabelText() == "Enter path to file to encode:");
+	}
+	
+	window.setDecodingMode();
+	SECTION("MainWindow changes textEntry label to file input in decoding mode")
+	{
+		CHECK(window.getTextEntryLabelText() == "Enter path to file to decode:");
+	}
+	
 	window.setEntryInputMode();
-	CHECK(window.getTextEntryLabelText() == "Enter text to encode:");
-}
-
-TEST_CASE( "MainWindow sets inputTextLabel to file input after choosing readFromFile radio button", "[MainWindowTests]" ) {
-	MockWindow window;
-	window.setEntryInputMode();
-	window.setFileInputMode();
-	CHECK(window.getTextEntryLabelText() == "Enter path to file to encode:");
+	SECTION("MainWindow changes textEntry label to entry input in decoding mode")
+	{
+		CHECK(window.getTextEntryLabelText() == "Enter text to decode:");
+	}
+	
+	window.setEncodingMode();
+	SECTION("MainWindow changes textEntry label to entry input in encoding mode")
+	{
+		CHECK(window.getTextEntryLabelText() == "Enter text to encode:");
+	}
 }

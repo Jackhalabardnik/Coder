@@ -2,6 +2,7 @@
 #define GTKMM_MAINWINDOW_H
 
 #include <gtkmm.h>
+#include <string>
 
 class MainWindow : public Gtk::Window
 {
@@ -27,11 +28,7 @@ private:
 
 	void setWindow();
 
-	void changeLabelsToDecodingMode();
-	void changeLabelsToEncodingMode();
-	
-	void changeLabelsToFileInputMode();
-	void changeLabelsToEntryInputMode();
+	void updateLabels();
 protected:
 
 	Gtk::Button startButton, exitButton;

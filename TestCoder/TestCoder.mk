@@ -5,15 +5,15 @@
 ## Release
 ProjectName            :=TestCoder
 ConfigurationName      :=Release
-WorkspacePath          :=/home/jacek/CLP
-ProjectPath            :=/home/jacek/CLP/TestCoder
+WorkspacePath          :=/home/jacek/CLP/Coder
+ProjectPath            :=/home/jacek/CLP/Coder/TestCoder
 IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=Jacek
-Date                   :=29/05/19
+User                   :=jacek
+Date                   :=30/05/19
 CodeLitePath           :=/home/jacek/.codelite
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -92,7 +92,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix): mainwindowtests.cpp $(IntermediateDirectory)/mainwindowtests.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/TestCoder/mainwindowtests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/TestCoder/mainwindowtests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/mainwindowtests.cpp$(DependSuffix): mainwindowtests.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/mainwindowtests.cpp$(DependSuffix) -MM mainwindowtests.cpp
 
@@ -100,7 +100,7 @@ $(IntermediateDirectory)/mainwindowtests.cpp$(PreprocessSuffix): mainwindowtests
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/mainwindowtests.cpp$(PreprocessSuffix) mainwindowtests.cpp
 
 $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix): CatchMain.cpp $(IntermediateDirectory)/CatchMain.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/TestCoder/CatchMain.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/TestCoder/CatchMain.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/CatchMain.cpp$(DependSuffix): CatchMain.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/CatchMain.cpp$(DependSuffix) -MM CatchMain.cpp
 
