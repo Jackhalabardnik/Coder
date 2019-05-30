@@ -5,14 +5,14 @@
 ## Release
 ProjectName            :=TestCoder
 ConfigurationName      :=Release
-WorkspacePath          :=/home/jacek/CLP/Coder
-ProjectPath            :=/home/jacek/CLP/Coder/TestCoder
+WorkspacePath          :=/home/jacek/CLP
+ProjectPath            :=/home/jacek/CLP/TestCoder
 IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=jacek
+User                   :=Jacek
 Date                   :=30/05/19
 CodeLitePath           :=/home/jacek/.codelite
 LinkerName             :=/usr/bin/g++
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) 
 
 
 
@@ -92,7 +92,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix): mainwindowtests.cpp $(IntermediateDirectory)/mainwindowtests.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/TestCoder/mainwindowtests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/TestCoder/mainwindowtests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/mainwindowtests.cpp$(DependSuffix): mainwindowtests.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/mainwindowtests.cpp$(DependSuffix) -MM mainwindowtests.cpp
 
@@ -100,12 +100,20 @@ $(IntermediateDirectory)/mainwindowtests.cpp$(PreprocessSuffix): mainwindowtests
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/mainwindowtests.cpp$(PreprocessSuffix) mainwindowtests.cpp
 
 $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix): CatchMain.cpp $(IntermediateDirectory)/CatchMain.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/TestCoder/CatchMain.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/TestCoder/CatchMain.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/CatchMain.cpp$(DependSuffix): CatchMain.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/CatchMain.cpp$(DependSuffix) -MM CatchMain.cpp
 
 $(IntermediateDirectory)/CatchMain.cpp$(PreprocessSuffix): CatchMain.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/CatchMain.cpp$(PreprocessSuffix) CatchMain.cpp
+
+$(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix): entryinputtests.cpp $(IntermediateDirectory)/entryinputtests.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/TestCoder/entryinputtests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/entryinputtests.cpp$(DependSuffix): entryinputtests.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/entryinputtests.cpp$(DependSuffix) -MM entryinputtests.cpp
+
+$(IntermediateDirectory)/entryinputtests.cpp$(PreprocessSuffix): entryinputtests.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/entryinputtests.cpp$(PreprocessSuffix) entryinputtests.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

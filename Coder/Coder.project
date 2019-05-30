@@ -9,10 +9,13 @@
   <Dependencies/>
   <VirtualDirectory Name="include">
     <File Name="mainwindow.h"/>
+    <File Name="InputInterferance.h"/>
+    <File Name="EntryInput.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="mainwindow.cpp" ExcludeProjConfig=""/>
     <File Name="main.cpp"/>
+    <File Name="EntryInput.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

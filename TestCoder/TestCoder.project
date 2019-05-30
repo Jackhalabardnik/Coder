@@ -10,6 +10,7 @@
   <VirtualDirectory Name="src">
     <File Name="mainwindowtests.cpp"/>
     <File Name="CatchMain.cpp"/>
+    <File Name="entryinputtests.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
