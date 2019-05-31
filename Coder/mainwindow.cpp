@@ -3,6 +3,7 @@
 MainWindow::MainWindow() 
 {
 	setGUI();
+	setErrorDialog();
 }
 void MainWindow::setGUI()
 	{
@@ -62,10 +63,10 @@ void MainWindow::setChooseMethodGrid()
 
 void MainWindow::setEntry()
 {
-	codeEntryLabel.set_text("Enter your public key:"); 
+	keyEntryLabel.set_text("Enter your public key:"); 
 	textEntryLabel.set_text("Enter text to encode:");
 	
-		codeEntry.set_text("key");
+		keyEntry.set_text("key");
 		textEntry.set_text("text");
 }
 
@@ -79,7 +80,9 @@ void MainWindow::setOutInfo()
 void MainWindow::setButtons()
 {
 	startButton.set_label("Go");
+	startButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::pushedStartButton));
 	exitButton.set_label("Exit");
+	exitButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::close));
 }
 
 void MainWindow::setMainGrid()
@@ -92,8 +95,8 @@ void MainWindow::setMainGrid()
 
 void MainWindow::fillMainGrid()
 	{
-		mainGrid.attach(codeEntryLabel, 3, 1,1,1);
-		mainGrid.attach(codeEntry,1, 2, 4,1);
+		mainGrid.attach(keyEntryLabel, 3, 1,1,1);
+		mainGrid.attach(keyEntry,1, 2, 4,1);
 		mainGrid.attach(textEntryLabel,3,3, 1,1);
 		mainGrid.attach(textEntry,1,4,4,1);
 
@@ -116,19 +119,27 @@ void MainWindow::setWindow()
 	show_all_children();
 }
 
+void MainWindow::setErrorDialog()
+{
+}
+
 void MainWindow::updateLabels()
 {
 	std::string input_text = readFromEntry.get_active() ? "text" : "non-relative path to file";
 	if(doEncoding.get_active())
 	{
-		codeEntryLabel.set_text("Enter your public key:"); 
+		keyEntryLabel.set_text("Enter your public key:"); 
 		textEntryLabel.set_text(std::string("Enter " + input_text + " to encode:"));
 		outputEntryLabel.set_text("Encoded text:");
 	}
 	else
 	{
-		codeEntryLabel.set_text("Enter your private key:"); 
+		keyEntryLabel.set_text("Enter your private key:"); 
 		textEntryLabel.set_text(std::string("Enter " + input_text + " to decode:"));
 		outputEntryLabel.set_text("Decoded text:");
 	}
+}
+
+void MainWindow::pushedStartButton()
+{
 }

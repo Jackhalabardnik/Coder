@@ -13,9 +13,9 @@ private:
 	void setGUI();
 
 	void setMainGrid();
-	
+
 	void setChooseInputGrid();
-	
+
 	void setChooseMethodGrid();
 
 	void setEntry();
@@ -29,15 +29,21 @@ private:
 	void setWindow();
 
 	void updateLabels();
+	
+	void setErrorDialog();
+
+	void pushedStartButton();
 protected:
+
+	Gtk::Dialog errorDialog;
 
 	Gtk::Button startButton, exitButton;
 
-	Gtk::Label outputEntryLabel, codeEntryLabel, textEntryLabel, chooseInputLabel, choseWorkModeLabel;
+	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, chooseInputLabel, choseWorkModeLabel;
 
 	Gtk::RadioButton doEncoding, doDecoding, readFromEntry, readFromFile;
 
-	Gtk::Entry codeEntry, textEntry, outputEntry;
+	Gtk::Entry keyEntry, textEntry, outputEntry;
 
 	Gtk::Grid mainGrid, chooseInputGrid, chooseMethodGrid;
 };
