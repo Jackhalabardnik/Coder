@@ -2,51 +2,49 @@
 #include <Coder/InputInterferance.h>
 #include <Coder/FileInput.cpp>
 
-TEST_CASE("File Input returns false with no file","[FileInputTests]")
+TEST_CASE("Basic FileInput workflow works", "[FileInputTests]")
 {
 	FileInput input;
-	CHECK(input.isInputGood() == false);
-}
-
-TEST_CASE("File Input return true with exsisting and non-empty file, non-relative path","[FileInputTests]")
-{
-	FileInput input;
+	SECTION("Returns false with no file")
+	{
+		CHECK(input.isInputGood() == false);
+	}
 	input.setText("/home/jacek/CLP/Coder/Release/file.txt");
-	CHECK(input.isInputGood() == true);
-}
-
-TEST_CASE("File Input return false with exsisting and empty file, non-relative path","[FileInputTests]")
-{
-	FileInput input;
+	SECTION("For exsisting and non-empty file returns true")
+	{
+		CHECK(input.isInputGood() == true);
+	}
 	input.setText("/home/jacek/CLP/Coder/Release/emptyfile.txt");
-	CHECK(input.isInputGood() == false);
-}
-
-TEST_CASE("File Input return true with non-exsisting file","[FileInputTests]")
-{
-	FileInput input;
+	SECTION("For exsisting and empty file returns false")
+	{
+		CHECK(input.isInputGood() == false);
+	}
 	input.setText("/home/jacek/CLP/Coder/Release/nofile.txt");
-	CHECK(input.isInputGood() == false);
-}
-
-TEST_CASE("File Input return file text","[FileInputTests]")
-{
-	FileInput input;
+	SECTION("For non-exsisting file returns false")
+	{
+		CHECK(input.isInputGood() == false);
+	}
 	input.setText("/home/jacek/CLP/Coder/Release/file.txt");
-	CHECK(input.getText() == "Some text\nSome texts");
-}
-
-TEST_CASE("File Input return empty string when false state","[FileInputTests]")
-{
-	FileInput input;
+	SECTION("Returnes file text")
+	{
+		CHECK(input.getText() == "Some text\nSome texts");
+	}
+	SECTION("After std::fstream buffer is read and empty, still returns true")
+	{
+		CHECK(input.isInputGood() == true);
+	}
+	SECTION("After getting text once is able to get text one more time")
+	{
+		CHECK(input.getText() == "Some text\nSome texts");
+	}
 	input.setText("/home/jacek/CLP/Coder/Release/emptyfile.txt");
-	CHECK(input.getText() == "");
-}
-
-TEST_CASE("File Input return true after getting file text","[FileInputTests]")
-{
-	FileInput input;
-	input.setText("/home/jacek/CLP/Coder/Release/file.txt");
-	input.getText();
-	CHECK(input.isInputGood() == true);
+	SECTION("When given empty file returns empty string")
+	{
+		CHECK(input.getText() == "");
+	}
+	input.setText("/home/jacek/CLP/Coder/Release/nofile.txt");
+	SECTION("When given non-exsisting file returns empty string")
+	{
+		CHECK(input.getText() == "");
+	}
 }

@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jacek
-Date                   :=30/05/19
+Date                   :=31/05/19
 CodeLitePath           :=/home/jacek/.codelite
 LinkerName             :=/usr/bin/i686-linux-gnu-g++
 SharedObjectLinkerName :=/usr/bin/i686-linux-gnu-g++ -shared -fPIC
@@ -60,7 +60,7 @@ AS       := /usr/bin/i686-linux-gnu-as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/mainwindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/EntryInput.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/mainwindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/EntryInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/FileInput.cpp$(ObjectSuffix) 
 
 
 
@@ -114,6 +114,14 @@ $(IntermediateDirectory)/EntryInput.cpp$(DependSuffix): EntryInput.cpp
 
 $(IntermediateDirectory)/EntryInput.cpp$(PreprocessSuffix): EntryInput.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/EntryInput.cpp$(PreprocessSuffix) EntryInput.cpp
+
+$(IntermediateDirectory)/FileInput.cpp$(ObjectSuffix): FileInput.cpp $(IntermediateDirectory)/FileInput.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/FileInput.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/FileInput.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/FileInput.cpp$(DependSuffix): FileInput.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/FileInput.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/FileInput.cpp$(DependSuffix) -MM FileInput.cpp
+
+$(IntermediateDirectory)/FileInput.cpp$(PreprocessSuffix): FileInput.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/FileInput.cpp$(PreprocessSuffix) FileInput.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
