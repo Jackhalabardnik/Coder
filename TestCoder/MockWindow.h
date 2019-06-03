@@ -8,6 +8,7 @@ class MockWindow : public MainWindow
 {
 public:
 	void clickExitButton();
+	void clickStartButton();
 	
 	void setDecodingMode();
 	void setEncodingMode();
@@ -15,8 +16,13 @@ public:
 	void setEntryInputMode();
 	void setFileInputMode();
 	
-	void writeToInput(std::string text);
-	std::string getInputText();
+	void writeToTextInput(std::string text);
+	
+	void writeToKeyEntry(std::string text);
+	bool hasKeyEntryGoodText();
+	
+	std::string getTextInputText();
+	std::string getKeyInputText();
 
 	std::string getKeyEntryLabelText();
 	std::string getTextEntryLabelText();

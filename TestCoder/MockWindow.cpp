@@ -4,10 +4,17 @@ void MockWindow::clickExitButton()
 	{
 		exitButton.clicked();
 	}
+
+void MockWindow::clickStartButton()
+	{
+		startButton.clicked();
+	}
+
 void MockWindow::setDecodingMode()
 	{
 		doDecoding.set_active();
 	}
+
 void MockWindow::setEncodingMode()
 	{
 		doEncoding.set_active();
@@ -23,14 +30,29 @@ void MockWindow::setFileInputMode()
 		readFromFile.set_active();
 	}
 	
-void MockWindow::writeToInput(std::string text)
+void MockWindow::writeToTextInput(std::string text)
 	{
 		textInput->setText(text);
 	}
 	
-std::string MockWindow::getInputText()
+void MockWindow::writeToKeyEntry(std::string text)
+	{
+		keyEntry.set_text(text);
+	}
+	
+bool MockWindow::hasKeyEntryGoodText()
+{
+	return keyInput.isInputGood();
+}
+	
+std::string MockWindow::getTextInputText()
 	{
 		return textInput->getText();
+	}
+
+std::string MockWindow::getKeyInputText()
+	{
+	return keyInput.getText();
 	}
 
 std::string MockWindow::getKeyEntryLabelText()

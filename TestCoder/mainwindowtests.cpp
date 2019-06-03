@@ -59,21 +59,48 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" )
 TEST_CASE("MainWindow updates InputInterferance", "[MainWindowTests]" )
 {
 	MockWindow window;
-	window.writeToInput("message");
+	window.writeToTextInput("message");
 	SECTION("InputInterferance is set on EntryInput after construction => returnes set text")
 	{
-		CHECK(window.getInputText() == "message");
+		CHECK(window.getTextInputText() == "message");
 	}
 	window.setFileInputMode();
-	window.writeToInput("/home/jacek/CLP/Coder/TestCoder/file.txt");
+	window.writeToTextInput("/home/jacek/CLP/Coder/TestCoder/file.txt");
 	SECTION("InputInterferance changes to FileInput mode after click => returnes file text")
 	{
-		CHECK(window.getInputText() == "Some text\nSome texts");
+		CHECK(window.getTextInputText() == "Some text\nSome texts");
 	}
 	window.setEntryInputMode();
-	window.writeToInput("AMEN");
+	window.writeToTextInput("AMEN");
 	SECTION("InputInterferance changes to EntryInput mode after click => returnes set text")
 	{
-		CHECK(window.getInputText() == "AMEN");
+		CHECK(window.getTextInputText() == "AMEN");
+	}
+}
+
+TEST_CASE("KeyEntryInput workflow works", "[MainWindowTests]")
+{
+	MockWindow window;
+	window.clickStartButton();
+	SECTION("EntryInput returns default KeyEntry text")
+	{
+		CHECK(window.getKeyInputText() == "key");
+	}
+	window.writeToKeyEntry("12345");
+	window.clickStartButton();
+	SECTION("EntryInput returns entered to KeyEntry text")
+	{
+		CHECK(window.getKeyInputText() == "12345");
+	}
+	SECTION("EntryInput returns true to apropirate KeyEntry text")
+	{
+		CHECK(window.hasKeyEntryGoodText() == true);
+	}
+	
+	window.writeToKeyEntry("");
+	window.clickStartButton();
+	SECTION("EntryInput returns false to empty KeyEntry text")
+	{
+		CHECK(window.hasKeyEntryGoodText() == false);
 	}
 }

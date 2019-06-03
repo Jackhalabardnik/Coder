@@ -172,5 +172,5 @@ void MainWindow::updateWorkMode()
 
 void MainWindow::doWork()
 {
-	dialog->run();
+	keyInput.setText(keyEntry.get_text());
 }
