@@ -104,3 +104,36 @@ TEST_CASE("KeyEntryInput workflow works", "[MainWindowTests]")
 		CHECK(window.hasKeyEntryGoodText() == false);
 	}
 }
+
+TEST_CASE("TextInput workflow works", "[MainWindowTests]")
+{
+	MockWindow window;
+	window.clickStartButton();
+	SECTION("TextInput retruns default textEntry text")
+	{
+		CHECK(window.getTextInputText() == "text");
+	}
+	window.writeToTextEntry("abcd");
+	window.clickStartButton();
+	SECTION("TextInput returns text set to textEntry")
+	{
+		CHECK(window.getTextInputText() == "abcd");
+	}
+	window.setFileInputMode();
+	window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/file.txt");
+	window.clickStartButton();
+	SECTION("TextInput returns file text from path set to textEntry")
+	{
+		CHECK(window.getTextInputText() == "Some text\nSome texts");
+	}
+	SECTION("TextInput returns true when given apropirate file")
+	{
+		CHECK(window.hasTextEntryGoodText() == true);
+	}
+	window.writeToTextEntry("/home/file.txt");
+	window.clickStartButton();
+	SECTION("TextInput returns false when given non-existing file")
+	{
+		CHECK(window.hasTextEntryGoodText() == false);
+	}
+}

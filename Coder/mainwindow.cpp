@@ -173,4 +173,5 @@ void MainWindow::updateWorkMode()
 void MainWindow::doWork()
 {
 	keyInput.setText(keyEntry.get_text());
+	textInput->setText(textEntry.get_text());
 }
