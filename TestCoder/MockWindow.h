@@ -21,6 +21,9 @@ public:
 	void writeToKeyEntry(std::string text);
 	bool hasKeyEntryGoodText();
 	
+	void writeToTextEntry(std::string text);
+	bool hasTextEntryGoodText();
+	
 	std::string getTextInputText();
 	std::string getKeyInputText();
 

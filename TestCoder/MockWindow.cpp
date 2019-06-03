@@ -44,6 +44,16 @@ bool MockWindow::hasKeyEntryGoodText()
 {
 	return keyInput.isInputGood();
 }
+
+void MockWindow::writeToTextEntry(std::string text)
+{
+	textEntry.set_text(text);
+}
+	
+bool MockWindow::hasTextEntryGoodText()
+{
+	return textInput->isInputGood();
+}
 	
 std::string MockWindow::getTextInputText()
 	{
