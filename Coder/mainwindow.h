@@ -3,6 +3,7 @@
 
 #include <gtkmm.h>
 #include <string>
+#include <memory>
 
 class MainWindow : public Gtk::Window
 {
@@ -35,8 +36,6 @@ private:
 	void pushedStartButton();
 protected:
 
-	Gtk::Dialog errorDialog;
-
 	Gtk::Button startButton, exitButton;
 
 	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, chooseInputLabel, choseWorkModeLabel;
@@ -46,6 +45,8 @@ protected:
 	Gtk::Entry keyEntry, textEntry, outputEntry;
 
 	Gtk::Grid mainGrid, chooseInputGrid, chooseMethodGrid;
+
+	std::unique_ptr<Gtk::MessageDialog> dialog;
 };
 
 #endif

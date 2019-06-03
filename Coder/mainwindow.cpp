@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow() 
+MainWindow::MainWindow()
 {
 	setGUI();
 	setErrorDialog();
@@ -121,6 +121,7 @@ void MainWindow::setWindow()
 
 void MainWindow::setErrorDialog()
 {
+	dialog = std::make_unique<Gtk::MessageDialog>("Nothing", false, Gtk::MessageType::MESSAGE_ERROR, Gtk::ButtonsType::BUTTONS_CLOSE, false);
 }
 
 void MainWindow::updateLabels()

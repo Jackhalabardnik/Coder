@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := /usr/bin/ar rcu
 CXX      := /usr/bin/g++
 CC       := /usr/bin/gcc
-CXXFLAGS :=  -O2 -std=c++14 -std=c++11 -Wall $(shell pkg-config --cflags gtkmm-3.0) $(Preprocessors)
-CFLAGS   :=  -O2 -Wall $(Preprocessors)
+CXXFLAGS :=  -O2 -std=c++14 -Wall $(shell pkg-config --cflags gtkmm-3.0) $(Preprocessors)
+CFLAGS   :=  -O2 -std=c++14 -std=c++11 -Wall $(Preprocessors)
 ASFLAGS  := 
 AS       := /usr/bin/as
 

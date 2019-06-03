@@ -14,12 +14,6 @@ public:
 	void setEntryInputMode();
 	
 	void setFileInputMode();
-	
-	void setKeyText(std::string text);
-	
-	bool isErrorDialogOpened();
-
-	std::string getErrorDialogText();
 
 	std::string getKeyEntryLabelText();
 	std::string getTextEntryLabelText();

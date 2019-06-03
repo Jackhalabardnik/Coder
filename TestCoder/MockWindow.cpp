@@ -23,21 +23,6 @@ void MockWindow::setFileInputMode()
 		readFromFile.set_active();
 	}
 
-void MockWindow::setKeyText(std::string text)
-	{
-		keyEntry.set_text(text);
-	}
-
-bool MockWindow::isErrorDialogOpened()
-	{
-		return false;
-	}
-
-std::string MockWindow::getErrorDialogText()
-	{
-		return "";
-	}
-
 std::string MockWindow::getKeyEntryLabelText()
 	{
 		return keyEntryLabel.get_text();
