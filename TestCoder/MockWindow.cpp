@@ -22,6 +22,16 @@ void MockWindow::setFileInputMode()
 	{
 		readFromFile.set_active();
 	}
+	
+void MockWindow::writeToInput(std::string text)
+	{
+		textInput->setText(text);
+	}
+	
+std::string MockWindow::getInputText()
+	{
+		return textInput->getText();
+	}
 
 std::string MockWindow::getKeyEntryLabelText()
 	{

@@ -10,6 +10,7 @@ void MainWindow::setGUI()
 		setChooseMethodGrid();
 		setChooseInputGrid();
 		setEntry();
+		setInputInterferance();
 		setOutInfo();
 
 		setButtons();
@@ -27,8 +28,8 @@ void MainWindow::setChooseInputGrid()
 	readFromFile.set_label("readFromFile");
 	readFromEntry.set_label("readFromEntry");
 	
-	readFromEntry.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateLabels));
-	readFromFile.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateLabels));
+	readFromEntry.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateInputMode));
+	readFromFile.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateInputMode));
 
 	readFromFile.join_group(readFromEntry);
 	readFromEntry.set_active();
@@ -48,8 +49,8 @@ void MainWindow::setChooseMethodGrid()
 	doDecoding.set_label("Decoding");
 	doEncoding.set_label("Encoding");
 
-	doDecoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateLabels));
-	doEncoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateLabels));
+	doDecoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateWorkMode));
+	doEncoding.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateWorkMode));
 
 	doDecoding.join_group(doEncoding);
 	doEncoding.set_active();
@@ -66,8 +67,13 @@ void MainWindow::setEntry()
 	keyEntryLabel.set_text("Enter your public key:"); 
 	textEntryLabel.set_text("Enter text to encode:");
 	
-		keyEntry.set_text("key");
-		textEntry.set_text("text");
+	keyEntry.set_text("key");
+	textEntry.set_text("text");
+}
+
+void MainWindow::setInputInterferance()
+{
+	textInput = std::make_shared<EntryInput>();
 }
 
 void MainWindow::setOutInfo()
@@ -80,7 +86,7 @@ void MainWindow::setOutInfo()
 void MainWindow::setButtons()
 {
 	startButton.set_label("Go");
-	startButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::pushedStartButton));
+	startButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::doWork));
 	exitButton.set_label("Exit");
 	exitButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::close));
 }
@@ -121,7 +127,7 @@ void MainWindow::setWindow()
 
 void MainWindow::setErrorDialog()
 {
-	dialog = std::make_unique<Gtk::MessageDialog>("Nothing", false, Gtk::MessageType::MESSAGE_ERROR, Gtk::ButtonsType::BUTTONS_CLOSE, false);
+	dialog = std::make_unique<Gtk::MessageDialog>(*this,"Nothing", false, Gtk::MessageType::MESSAGE_ERROR, Gtk::ButtonsType::BUTTONS_CLOSE, false);
 }
 
 void MainWindow::updateLabels()
@@ -141,6 +147,30 @@ void MainWindow::updateLabels()
 	}
 }
 
-void MainWindow::pushedStartButton()
+void MainWindow::updateInputMode()
 {
+	updateInput();
+	updateWorkMode();
+}
+
+void MainWindow::updateInput()
+{
+	if(readFromEntry.get_active())
+	{
+		textInput = std::make_shared<EntryInput>();
+	}
+	else
+	{
+		textInput = std::make_shared<FileInput>();
+	}
+}
+
+void MainWindow::updateWorkMode()
+{
+	updateLabels();
+}
+
+void MainWindow::doWork()
+{
+	dialog->run();
 }

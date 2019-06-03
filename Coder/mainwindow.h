@@ -4,6 +4,9 @@
 #include <gtkmm.h>
 #include <string>
 #include <memory>
+#include <InputInterferance.h>
+#include <EntryInput.h>
+#include <FileInput.h>
 
 class MainWindow : public Gtk::Window
 {
@@ -21,6 +24,8 @@ private:
 
 	void setEntry();
 
+	void setInputInterferance();
+
 	void setOutInfo();
 
 	void setButtons();
@@ -29,11 +34,17 @@ private:
 
 	void setWindow();
 
+	void updateInputMode();
+
+	void updateInput();
+
+	void updateWorkMode();
+
 	void updateLabels();
-	
+
 	void setErrorDialog();
 
-	void pushedStartButton();
+	void doWork();
 protected:
 
 	Gtk::Button startButton, exitButton;
@@ -47,6 +58,12 @@ protected:
 	Gtk::Grid mainGrid, chooseInputGrid, chooseMethodGrid;
 
 	std::unique_ptr<Gtk::MessageDialog> dialog;
+
+	std::shared_ptr<InputInterferance> textInput;
+
+	EntryInput keyInput, textInputEntryMode;
+
+	FileInput textInputFileMode;
 };
 
 #endif

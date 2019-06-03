@@ -5,7 +5,8 @@
 
 Glib::RefPtr<Gtk::Application> app = Gtk::Application::create("I have to add this in order to make gtkmm going");
 
-TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" ) {
+TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" ) 
+{
 	MockWindow window;
 	SECTION("Sets labels by defualt to EntryInput-Encoding mode")
 	{
@@ -52,5 +53,27 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" ) {
 	SECTION("Changes textEntry label to entry input in encoding mode")
 	{
 		CHECK(window.getTextEntryLabelText() == "Enter text to encode:");
+	}
+}
+
+TEST_CASE("MainWindow updates InputInterferance", "[MainWindowTests]" )
+{
+	MockWindow window;
+	window.writeToInput("message");
+	SECTION("InputInterferance is set on EntryInput after construction => returnes set text")
+	{
+		CHECK(window.getInputText() == "message");
+	}
+	window.setFileInputMode();
+	window.writeToInput("/home/jacek/CLP/Coder/TestCoder/file.txt");
+	SECTION("InputInterferance changes to FileInput mode after click => returnes file text")
+	{
+		CHECK(window.getInputText() == "Some text\nSome texts");
+	}
+	window.setEntryInputMode();
+	window.writeToInput("AMEN");
+	SECTION("InputInterferance changes to EntryInput mode after click => returnes set text")
+	{
+		CHECK(window.getInputText() == "AMEN");
 	}
 }
