@@ -1,61 +1,7 @@
 #include "catch.hpp"
 #include "string.h"
 #include "Coder/mainwindow.cpp"
-
-class MockWindow : public MainWindow
-{
-public:
-	void clickExitButton()
-	{
-		exitButton.clicked();
-	}
-	void setDecodingMode()
-	{
-		doDecoding.set_active();
-	}
-	void setEncodingMode()
-	{
-		doEncoding.set_active();
-	}
-	
-	void setEntryInputMode()
-	{
-		readFromEntry.set_active();
-	}
-	
-	void setFileInputMode()
-	{
-		readFromFile.set_active();
-	}
-	
-	void setKeyText(std::string text)
-	{
-		keyEntry.set_text(text);
-	}
-	
-	bool isErrorDialogOpened()
-	{
-		return false;
-	}
-	
-	std::string getErrorDialogText()
-	{
-		return "";
-	}
-	
-	std::string getKeyEntryLabelText()
-	{
-		return keyEntryLabel.get_text();
-	}
-	std::string getTextEntryLabelText()
-	{
-		return textEntryLabel.get_text();
-	}
-	std::string getOutputEntryLabelText()
-	{
-		return outputEntryLabel.get_text();
-	}
-};
+#include <MockWindow.h>
 
 Glib::RefPtr<Gtk::Application> app = Gtk::Application::create("I have to add this in order to make gtkmm going");
 
@@ -107,11 +53,4 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" ) {
 	{
 		CHECK(window.getTextEntryLabelText() == "Enter text to encode:");
 	}
-}
-
-TEST_CASE("Exit button closes program","[MainWindowTests]")
-{
-	MockWindow window;
-	window.clickExitButton();
-	CHECK(window.is_visible() == false);
 }

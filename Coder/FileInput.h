@@ -13,8 +13,9 @@ class FileInput : public InputInterferance
 	virtual void setText(const std::string text);
 	virtual std::string getText();
 private:
+	void readTextFromFileStream();
 	std::fstream fileStream;
-	bool hasOpenedSth = false, hasSum = false;
+	bool hasOpenedSth = false;
 	std::string sum; 
 };
 
