@@ -77,3 +77,18 @@ std::string MockWindow::getOutputEntryLabelText()
 	{
 		return outputEntryLabel.get_text();
 	}
+	
+std::string MockWindow::getMajorErrorMessage()
+	{
+		return MainWindow::getMajorErrorMessage();
+	}
+
+std::string MockWindow::getMinorErrorMessage()
+	{
+		return MainWindow::getMinorErrorMessage();
+	}
+	
+bool MockWindow::isError()
+	{
+		return MainWindow::isError();
+	}

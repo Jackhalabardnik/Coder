@@ -30,6 +30,11 @@ public:
 	std::string getKeyEntryLabelText();
 	std::string getTextEntryLabelText();
 	std::string getOutputEntryLabelText();
+	
+	std::string getMajorErrorMessage();
+	std::string getMinorErrorMessage();
+	
+	bool isError();
 };
 
 #endif

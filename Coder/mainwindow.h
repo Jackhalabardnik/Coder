@@ -47,6 +47,13 @@ private:
 	void doWork();
 protected:
 
+	std::string getMajorErrorMessage();
+
+	std::string getMinorErrorMessage();
+
+	bool isError();
+
+
 	Gtk::Button startButton, exitButton;
 
 	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, chooseInputLabel, choseWorkModeLabel;

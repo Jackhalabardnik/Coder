@@ -137,3 +137,72 @@ TEST_CASE("TextInput workflow works", "[MainWindowTests]")
 		CHECK(window.hasTextEntryGoodText() == false);
 	}
 }
+
+TEST_CASE("MainWindows recognises error state", "[MainWindowTests]")
+{
+	MockWindow window;
+	window.setEntryInputMode();
+	
+	SECTION("When fields are filled after creation everything is okay")
+	{
+		CHECK(window.isError() == false);
+	}
+	window.writeToTextEntry("");
+	window.clickStartButton();
+	SECTION("Empty text field returns error")
+	{
+		CHECK(window.isError() == true);
+	}
+	window.writeToTextEntry("something");
+	window.writeToKeyEntry("");
+	window.clickStartButton();
+	SECTION("Empty key field returns error")
+	{
+		CHECK(window.isError() == true);
+	}
+	window.writeToKeyEntry("keyyyyy");
+	window.clickStartButton();
+	SECTION("Filled both fields return ok")
+	{
+		CHECK(window.isError() == false);
+	}
+	
+	window.setFileInputMode();
+	window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/file.txt");
+	window.clickStartButton();
+	SECTION("For filled exsisting file returns ok")
+	{
+		CHECK(window.isError() == false);
+	}
+	window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/emptyfile.txt");
+	window.clickStartButton();
+	SECTION("For empty exsisting file returns error")
+	{
+		CHECK(window.isError() == true);
+	}
+	window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/nofile.txt");
+	window.clickStartButton();
+	SECTION("For non-exsisting file returns error")
+	{
+		CHECK(window.isError() == true);
+	}
+}
+
+TEST_CASE("MainWindow prompts ErrorDialog message when something is not ok", "[MainWindowTests]")
+{
+	MockWindow window;
+	window.setEncodingMode();
+	window.setEntryInputMode();
+	window.writeToKeyEntry("");
+	SECTION("Only empty KeyEntry prompts error in encoding mode")
+	{
+		CHECK(window.getMajorErrorMessage() == "Encoding is not possible");
+		CHECK(window.getMinorErrorMessage() == "Key entry is empty");
+	}
+	window.setDecodingMode();
+	SECTION("Only empty KeyEntry prompts error in decoding mode")
+	{
+		CHECK(window.getMajorErrorMessage() == "Decoding is not possible");
+		CHECK(window.getMinorErrorMessage() == "Key entry is empty");
+	}
+}

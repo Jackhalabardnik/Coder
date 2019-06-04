@@ -74,6 +74,8 @@ void MainWindow::setEntry()
 void MainWindow::setInputInterferance()
 {
 	textInput = std::make_shared<EntryInput>();
+	keyInput.setText(keyEntry.get_text());
+	textInput->setText(textEntry.get_text());
 }
 
 void MainWindow::setOutInfo()
@@ -175,3 +177,19 @@ void MainWindow::doWork()
 	keyInput.setText(keyEntry.get_text());
 	textInput->setText(textEntry.get_text());
 }
+
+bool MainWindow::isError()
+{
+	return textInput->isInputGood() == false || keyInput.isInputGood() == false;
+}
+
+std::string MainWindow::getMajorErrorMessage()
+	{
+		std::string str = doEncoding.get_active() ? "Encoding " : "Decoding ";
+		return std::string(str + "is not possible");
+	}
+
+std::string MainWindow::getMinorErrorMessage()
+	{
+		return "Key entry is empty";
+	}
