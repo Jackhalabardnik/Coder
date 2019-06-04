@@ -3,7 +3,6 @@
 MainWindow::MainWindow()
 {
 	setGUI();
-	setErrorDialog();
 }
 void MainWindow::setGUI()
 	{
@@ -127,11 +126,6 @@ void MainWindow::setWindow()
 	show_all_children();
 }
 
-void MainWindow::setErrorDialog()
-{
-	dialog = std::make_unique<Gtk::MessageDialog>(*this,"Nothing", false, Gtk::MessageType::MESSAGE_ERROR, Gtk::ButtonsType::BUTTONS_CLOSE, false);
-}
-
 void MainWindow::updateLabels()
 {
 	std::string input_text = readFromEntry.get_active() ? "text" : "non-relative path to file";
@@ -176,11 +170,23 @@ void MainWindow::doWork()
 {
 	keyInput.setText(keyEntry.get_text());
 	textInput->setText(textEntry.get_text());
+	if(isError())
+	{
+		showErrorDialog();
+	}
 }
 
 bool MainWindow::isError()
 {
 	return textInput->isInputGood() == false || keyInput.isInputGood() == false;
+}
+
+void MainWindow::showErrorDialog()
+{
+	Gtk::MessageDialog dialog(*this,"Nothing", false, Gtk::MessageType::MESSAGE_ERROR, Gtk::ButtonsType::BUTTONS_CLOSE, false);
+	dialog.set_message(getMajorErrorMessage());
+	dialog.set_secondary_text(getMinorErrorMessage());
+	dialog.run();
 }
 
 std::string MainWindow::getMajorErrorMessage()
@@ -191,5 +197,18 @@ std::string MainWindow::getMajorErrorMessage()
 
 std::string MainWindow::getMinorErrorMessage()
 	{
-		return "Key entry is empty";
+		std::string message;
+		if(keyInput.isInputGood() == false)
+		{
+			message += "Key entry is empty";
+		}
+		if(textInput->isInputGood() == false)
+		{
+			if(message.size()>0)
+			{
+				message +="\n";
+			}
+			message += readFromEntry.get_active() ? "Text entry is empty" : "File is empty or it does not exsists";
+		}
+		return message;
 	}

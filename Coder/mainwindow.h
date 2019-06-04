@@ -44,6 +44,8 @@ private:
 
 	void setErrorDialog();
 
+	void showErrorDialog();
+
 	void doWork();
 protected:
 
@@ -63,8 +65,6 @@ protected:
 	Gtk::Entry keyEntry, textEntry, outputEntry;
 
 	Gtk::Grid mainGrid, chooseInputGrid, chooseMethodGrid;
-
-	std::unique_ptr<Gtk::MessageDialog> dialog;
 
 	std::shared_ptr<InputInterferance> textInput;
 

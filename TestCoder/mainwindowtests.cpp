@@ -92,7 +92,7 @@ TEST_CASE("KeyEntryInput workflow works", "[MainWindowTests]")
 	{
 		CHECK(window.getKeyInputText() == "12345");
 	}
-	SECTION("EntryInput returns true to apropirate KeyEntry text")
+	SECTION("EntryInput returns true to appropirate KeyEntry text")
 	{
 		CHECK(window.hasKeyEntryGoodText() == true);
 	}
@@ -126,7 +126,7 @@ TEST_CASE("TextInput workflow works", "[MainWindowTests]")
 	{
 		CHECK(window.getTextInputText() == "Some text\nSome texts");
 	}
-	SECTION("TextInput returns true when given apropirate file")
+	SECTION("TextInput returns true when given appropirate file")
 	{
 		CHECK(window.hasTextEntryGoodText() == true);
 	}
@@ -162,7 +162,7 @@ TEST_CASE("MainWindows recognises error state", "[MainWindowTests]")
 	}
 	window.writeToKeyEntry("keyyyyy");
 	window.clickStartButton();
-	SECTION("Filled both fields return ok")
+	SECTION("After filling both fields again return ok")
 	{
 		CHECK(window.isError() == false);
 	}
@@ -188,21 +188,50 @@ TEST_CASE("MainWindows recognises error state", "[MainWindowTests]")
 	}
 }
 
-TEST_CASE("MainWindow prompts ErrorDialog message when something is not ok", "[MainWindowTests]")
+TEST_CASE("MainWindow prompts appropirate ErrorDialog message when something is not ok", "[MainWindowTests]")
 {
 	MockWindow window;
-	window.setEncodingMode();
-	window.setEntryInputMode();
-	window.writeToKeyEntry("");
-	SECTION("Only empty KeyEntry prompts error in encoding mode")
+	SECTION("Major message changes as code mode changes")
 	{
+		window.setEncodingMode();
 		CHECK(window.getMajorErrorMessage() == "Encoding is not possible");
+		window.setDecodingMode();
+		CHECK(window.getMajorErrorMessage() == "Decoding is not possible");
+	}
+	SECTION("Minor message says that key entry is empty")
+	{
+		window.writeToKeyEntry("");
+		window.clickStartButton();
 		CHECK(window.getMinorErrorMessage() == "Key entry is empty");
 	}
-	window.setDecodingMode();
-	SECTION("Only empty KeyEntry prompts error in decoding mode")
+	SECTION("Minor message says that text entry in EntryInputMode is empty")
 	{
-		CHECK(window.getMajorErrorMessage() == "Decoding is not possible");
-		CHECK(window.getMinorErrorMessage() == "Key entry is empty");
+		window.setEntryInputMode();
+		window.writeToTextEntry("");
+		window.clickStartButton();
+		CHECK(window.getMinorErrorMessage() == "Text entry is empty");
+	}
+	SECTION("Minor message says that file in FileInputMode is empty or non-exsisting")
+	{
+		window.setFileInputMode();
+		window.writeToTextEntry("");
+		window.clickStartButton();
+		CHECK(window.getMinorErrorMessage() == "File is empty or it does not exsists");
+	}
+	SECTION("Minor message says that file in FileInputMode is empty or non-exsisting and key entry is empty")
+	{
+		window.setFileInputMode();
+		window.writeToTextEntry("");
+		window.writeToKeyEntry("");
+		window.clickStartButton();
+		CHECK(window.getMinorErrorMessage() == "Key entry is empty\nFile is empty or it does not exsists");
+	}
+	SECTION("Minor message says that text entry in EntryInputMode is empty and key entry is empty")
+	{
+		window.setEntryInputMode();
+		window.writeToTextEntry("");
+		window.writeToKeyEntry("");
+		window.clickStartButton();
+		CHECK(window.getMinorErrorMessage() == "Key entry is empty\nText entry is empty");
 	}
 }
