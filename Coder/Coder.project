@@ -12,12 +12,14 @@
     <File Name="InputInterferance.h"/>
     <File Name="EntryInput.h"/>
     <File Name="FileInput.h"/>
+    <File Name="CodingService.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="mainwindow.cpp" ExcludeProjConfig=""/>
     <File Name="main.cpp"/>
     <File Name="EntryInput.cpp"/>
     <File Name="FileInput.cpp"/>
+    <File Name="CodingService.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

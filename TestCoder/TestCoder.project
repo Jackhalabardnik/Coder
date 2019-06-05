@@ -13,6 +13,7 @@
     <File Name="entryinputtests.cpp"/>
     <File Name="fileinputtests.cpp"/>
     <File Name="MockWindow.cpp"/>
+    <File Name="codingservicetests.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
@@ -72,7 +73,6 @@
     <Configuration Name="Release" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-O2;-std=c++14;-Wall;$(shell pkg-config --cflags gtkmm-3.0)" C_Options="-O2;-std=c++14;-std=c++11;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="/home/jacek/CLP/Coder"/>
-        <IncludePath Value="/home/jacek/CLP"/>
         <IncludePath Value="/home/jacek/CLP/Coder/Coder"/>
         <Preprocessor Value="NDEBUG"/>
       </Compiler>

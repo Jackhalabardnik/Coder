@@ -36,7 +36,7 @@ ObjectsFileList        :="TestCoder.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
 LinkOptions            :=  $(shell pkg-config --libs gtkmm-3.0)
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)/home/jacek/CLP/Coder $(IncludeSwitch)/home/jacek/CLP $(IncludeSwitch)/home/jacek/CLP/Coder/Coder 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)/home/jacek/CLP/Coder $(IncludeSwitch)/home/jacek/CLP/Coder/Coder 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/fileinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/MockWindow.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/fileinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/MockWindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/codingservicetests.cpp$(ObjectSuffix) 
 
 
 
@@ -130,6 +130,14 @@ $(IntermediateDirectory)/MockWindow.cpp$(DependSuffix): MockWindow.cpp
 
 $(IntermediateDirectory)/MockWindow.cpp$(PreprocessSuffix): MockWindow.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/MockWindow.cpp$(PreprocessSuffix) MockWindow.cpp
+
+$(IntermediateDirectory)/codingservicetests.cpp$(ObjectSuffix): codingservicetests.cpp $(IntermediateDirectory)/codingservicetests.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/TestCoder/codingservicetests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/codingservicetests.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/codingservicetests.cpp$(DependSuffix): codingservicetests.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/codingservicetests.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/codingservicetests.cpp$(DependSuffix) -MM codingservicetests.cpp
+
+$(IntermediateDirectory)/codingservicetests.cpp$(PreprocessSuffix): codingservicetests.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/codingservicetests.cpp$(PreprocessSuffix) codingservicetests.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
