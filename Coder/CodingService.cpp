@@ -2,33 +2,38 @@
 
 std::string CodingService::encode(std::string text, std::string key)
 {
-	if(key.empty() == false)
-	{
-		std::string longkey = widenKey(text,key);
-		for(int i=0;i<text.size();i++)
-		{
-			int code = text[i] + longkey[i] - 32; 
-			if(code>126)
-			{
-				code -= 93;
-			}
-			text[i] = code;
-		}
-	}
-	return text;
+	return doJob(text,key,Coding::encoding);
 }
 
 std::string CodingService::decode(std::string text, std::string key)
+{
+	return doJob(text,key,Coding::decoding);
+}
+
+std::string CodingService::doJob(std::string text, std::string key, Coding mode)
 {
 	if(key.empty() == false)
 	{
 		std::string longkey = widenKey(text,key);
 		int i=0;
-		std::transform(text.begin(),text.end(),text.begin(),[=,&i](char c){
-			int code = int(c) - int(longkey[i]) + firstCharacterToCode;
-			if(code<firstCharacterInOutput)
+		std::transform(text.begin(),text.end(),text.begin(),
+		[=,&i](char c){
+			int code;
+			if(mode == Coding::encoding)
 			{
-				code += differenceBetweenFirstAndLast;
+				code = int(c) + int(longkey[i]) - firstCharacterToCode;
+				if(code>lastCharacterToInput)
+				{
+					code -= differenceBetweenFirstAndLast;
+				}
+			}
+			if(mode == Coding::decoding)
+			{
+				code = int(c) - int(longkey[i]) + firstCharacterToCode;
+				if(code<firstCharacterInOutput)
+				{
+					code += differenceBetweenFirstAndLast;
+				}
 			}
 			i++;
 			return code;
@@ -36,7 +41,6 @@ std::string CodingService::decode(std::string text, std::string key)
 	}
 	return text;
 }
-
 
 std::string CodingService::widenKey(std::string text,std::string key)
 {
