@@ -12,11 +12,11 @@ OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=jacek
-Date                   :=04/06/19
+User                   :=Jacek
+Date                   :=05/06/19
 CodeLitePath           :=/home/jacek/.codelite
-LinkerName             :=/usr/bin/x86_64-linux-gnu-g++
-SharedObjectLinkerName :=/usr/bin/x86_64-linux-gnu-g++ -shared -fPIC
+LinkerName             :=/usr/bin/i686-linux-gnu-g++
+SharedObjectLinkerName :=/usr/bin/i686-linux-gnu-g++ -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
@@ -47,13 +47,13 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := /usr/bin/x86_64-linux-gnu-ar rcu
-CXX      := /usr/bin/x86_64-linux-gnu-g++ -std=c++14 -Wall
-CC       := /usr/bin/x86_64-linux-gnu-gcc
+AR       := /usr/bin/i686-linux-gnu-ar rcu
+CXX      := /usr/bin/i686-linux-gnu-g++
+CC       := /usr/bin/i686-linux-gnu-gcc
 CXXFLAGS :=  -O2 -std=c++14 -Wall $(shell pkg-config --cflags gtkmm-3.0) $(Preprocessors)
 CFLAGS   :=  -O2 -fopenmp -std=c++14 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := /usr/bin/x86_64-linux-gnu-as
+AS       := /usr/bin/i686-linux-gnu-as
 
 
 ##

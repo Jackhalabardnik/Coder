@@ -10,6 +10,8 @@ public:
 	void clickExitButton();
 	void clickStartButton();
 	
+	void doWork() override;
+	
 	void setDecodingMode();
 	void setEncodingMode();
 	

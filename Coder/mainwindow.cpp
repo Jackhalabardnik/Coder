@@ -168,12 +168,17 @@ void MainWindow::updateWorkMode()
 
 void MainWindow::doWork()
 {
-	keyInput.setText(keyEntry.get_text());
-	textInput->setText(textEntry.get_text());
+	transferTextFromEntriesToInput();
 	if(isError())
 	{
 		showErrorDialog();
 	}
+}
+
+void MainWindow::transferTextFromEntriesToInput()
+{
+	keyInput.setText(keyEntry.get_text());
+	textInput->setText(textEntry.get_text());
 }
 
 bool MainWindow::isError()

@@ -9,6 +9,11 @@ void MockWindow::clickStartButton()
 	{
 		startButton.clicked();
 	}
+	
+void MockWindow::doWork()
+	{
+		transferTextFromEntriesToInput();
+	}
 
 void MockWindow::setDecodingMode()
 	{

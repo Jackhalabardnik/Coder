@@ -46,8 +46,9 @@ private:
 
 	void showErrorDialog();
 
-	void doWork();
+	virtual void doWork();
 protected:
+	void transferTextFromEntriesToInput();
 
 	std::string getMajorErrorMessage();
 
