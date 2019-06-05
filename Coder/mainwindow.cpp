@@ -63,7 +63,7 @@ void MainWindow::setChooseMethodGrid()
 
 void MainWindow::setEntry()
 {
-	keyEntryLabel.set_text("Enter your public key:"); 
+	keyEntryLabel.set_text("Enter your key:"); 
 	textEntryLabel.set_text("Enter text to encode:");
 	
 	keyEntry.set_text("key");
@@ -131,13 +131,11 @@ void MainWindow::updateLabels()
 	std::string input_text = readFromEntry.get_active() ? "text" : "non-relative path to file";
 	if(doEncoding.get_active())
 	{
-		keyEntryLabel.set_text("Enter your public key:"); 
 		textEntryLabel.set_text(std::string("Enter " + input_text + " to encode:"));
 		outputEntryLabel.set_text("Encoded text:");
 	}
 	else
 	{
-		keyEntryLabel.set_text("Enter your private key:"); 
 		textEntryLabel.set_text(std::string("Enter " + input_text + " to decode:"));
 		outputEntryLabel.set_text("Decoded text:");
 	}

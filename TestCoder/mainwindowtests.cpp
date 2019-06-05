@@ -10,7 +10,7 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" )
 	MockWindow window;
 	SECTION("Sets labels by defualt to EntryInput-Encoding mode")
 	{
-		CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
+		CHECK( window.getKeyEntryLabelText() == "Enter your key:" );
 		CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
 		CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
 	}
@@ -18,7 +18,7 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" )
 	window.setDecodingMode();
 	SECTION("Sets labels to decode method")
 	{
-		CHECK( window.getKeyEntryLabelText() == "Enter your private key:" );
+		CHECK( window.getKeyEntryLabelText() == "Enter your key:" );
 		CHECK( window.getTextEntryLabelText() == "Enter text to decode:" );
 		CHECK( window.getOutputEntryLabelText() == "Decoded text:" );
 	}
@@ -26,7 +26,7 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" )
 	window.setEncodingMode();
 	SECTION("Could set labels back to encoding mode")
 	{
-		CHECK( window.getKeyEntryLabelText() == "Enter your public key:" );
+		CHECK( window.getKeyEntryLabelText() == "Enter your key:" );
 		CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
 		CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
 	}
