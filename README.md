@@ -1,2 +1,2 @@
 # CoderRepo
-Gtkmm aplication encoding and decoding text using RSA
+Gtkmm aplication encoding and decoding text
