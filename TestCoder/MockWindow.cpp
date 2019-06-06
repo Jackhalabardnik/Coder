@@ -69,7 +69,7 @@ std::string MockWindow::getKeyInputText()
 
 std::string MockWindow::getOutputEntryText()
 	{
-		return outputEntry.get_text();
+		return outputTextView.get_buffer()->get_text();
 	}
 
 std::string MockWindow::getKeyEntryLabelText()

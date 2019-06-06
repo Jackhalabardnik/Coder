@@ -4,8 +4,9 @@ MainWindow::MainWindow()
 {
 	setGUI();
 }
+
 void MainWindow::setGUI()
-	{
+{
 		setChooseMethodGrid();
 		setChooseInputGrid();
 		setEntry();
@@ -18,7 +19,7 @@ void MainWindow::setGUI()
 		fillMainGrid();
 
 		setWindow();
-	}
+}
 
 void MainWindow::setChooseInputGrid()
 {
@@ -80,8 +81,18 @@ void MainWindow::setInputInterferance()
 void MainWindow::setOutInfo()
 {
 	outputEntryLabel.set_text("Encoded text:");
-	outputEntry.set_text("Nothing here");
-	outputEntry.set_editable(false);
+	setTextToTextBuffer("Nothing here");
+	outputTextView.set_editable(false);
+	scrolledWindow.add(outputTextView);
+	scrolledWindow.set_size_request(300,100);
+	scrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);
+}
+
+void MainWindow::setTextToTextBuffer(std::string text)
+{
+	Glib::RefPtr<Gtk::TextBuffer> textBuffer = Gtk::TextBuffer::create();
+	textBuffer->set_text(text);
+	outputTextView.set_buffer(textBuffer);
 }
 
 void MainWindow::setButtons()
@@ -116,14 +127,15 @@ void MainWindow::fillMainGrid()
 		mainGrid.attach(startButton, 2, 6, 4,1);
 
 		mainGrid.attach(outputEntryLabel,3,7,1,1);
-		mainGrid.attach(outputEntry,2, 8, 4,1);
+		mainGrid.attach(scrolledWindow,2, 8, 5,3);
 
-		mainGrid.attach(exitButton, 2, 9, 4,1);
+		mainGrid.attach(exitButton, 2, 12, 4,1);
 }
 
 void MainWindow::setWindow()
 {
 	set_border_width(10);
+	set_size_request(300,400);
 	set_resizable(false);
 	set_title("Coder v1.1.2");
 	show_all_children();
@@ -178,11 +190,11 @@ void MainWindow::doWork()
 	{
 		if(doEncoding.get_active())
 		{
-			outputEntry.set_text(codingService.encode(textInput->getText(),keyInput.getText()));
+			setTextToTextBuffer(codingService.encode(textInput->getText(),keyInput.getText()));
 		} 
 		else
 		{
-			outputEntry.set_text(codingService.decode(textInput->getText(),keyInput.getText()));
+			setTextToTextBuffer(codingService.decode(textInput->getText(),keyInput.getText()));
 		}
 	}
 }

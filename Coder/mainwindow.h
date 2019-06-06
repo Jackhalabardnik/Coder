@@ -29,6 +29,8 @@ private:
 
 	void setOutInfo();
 
+	void setTextToTextBuffer(std::string text);
+
 	void setButtons();
 
 	void fillMainGrid();
@@ -64,7 +66,11 @@ protected:
 
 	Gtk::RadioButton doEncoding, doDecoding, readFromEntry, readFromFile;
 
-	Gtk::Entry keyEntry, textEntry, outputEntry;
+	Gtk::Entry keyEntry, textEntry;
+
+	Gtk::TextView outputTextView;
+
+	Gtk::ScrolledWindow scrolledWindow;
 
 	Gtk::Grid mainGrid, chooseInputGrid, chooseMethodGrid;
 
@@ -73,7 +79,7 @@ protected:
 	EntryInput keyInput, textInputEntryMode;
 
 	FileInput textInputFileMode;
-	
+
 	CodingService codingService;
 };
 
