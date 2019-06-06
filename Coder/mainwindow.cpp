@@ -90,34 +90,37 @@ void MainWindow::setButtons()
 	startButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::doWork));
 	exitButton.set_label("Exit");
 	exitButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::close));
+	openChooseFileDialog.set_label("...");
+	openChooseFileDialog.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::chooseFileFromADialog));
 }
 
 void MainWindow::setMainGrid()
-	{
+{
 		mainGrid.set_column_spacing(5);
 		mainGrid.set_row_spacing(4);
 		
 		add(mainGrid);
-	}
+}
 
 void MainWindow::fillMainGrid()
-	{
+{
 		mainGrid.attach(keyEntryLabel, 3, 1,1,1);
 		mainGrid.attach(keyEntry,1, 2, 4,1);
 		mainGrid.attach(textEntryLabel,3,3, 1,1);
 		mainGrid.attach(textEntry,1,4,4,1);
+		mainGrid.attach(openChooseFileDialog, 5,4,1,1);
 
 		mainGrid.attach(chooseMethodGrid,2,5,1,1);
 		mainGrid.attach(chooseInputGrid,4, 5, 1, 1);
 
-		mainGrid.attach(startButton, 2, 6, 3,1);
+		mainGrid.attach(startButton, 2, 6, 4,1);
 
-		mainGrid.attach(outputEntryLabel,2,7,3,1);
-		mainGrid.attach(outputEntry,1, 8, 4,1);
+		mainGrid.attach(outputEntryLabel,3,7,1,1);
+		mainGrid.attach(outputEntry,2, 8, 4,1);
 
 		mainGrid.attach(exitButton, 2, 9, 4,1);
-	}
-	
+}
+
 void MainWindow::setWindow()
 {
 	set_border_width(10);
@@ -204,13 +207,13 @@ void MainWindow::showErrorDialog()
 }
 
 std::string MainWindow::getMajorErrorMessage()
-	{
+{
 		std::string str = doEncoding.get_active() ? "Encoding " : "Decoding ";
 		return std::string(str + "is not possible");
-	}
+}
 
 std::string MainWindow::getMinorErrorMessage()
-	{
+{
 		std::string message;
 		if(keyInput.isInputGood() == false)
 		{
@@ -225,4 +228,30 @@ std::string MainWindow::getMinorErrorMessage()
 			message += readFromEntry.get_active() ? "Text entry is empty" : "File is empty or it does not exsists";
 		}
 		return message;
+}
+
+void MainWindow::chooseFileFromADialog()
+{
+	if(readFromFile.get_active())
+	{
+		 Gtk::FileChooserDialog dialog("Please choose a text file", Gtk::FILE_CHOOSER_ACTION_OPEN);
+		dialog.set_transient_for(*this);
+
+		dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+		dialog.add_button("_Open", Gtk::RESPONSE_OK);
+
+		auto filter_text = Gtk::FileFilter::create();
+		filter_text->set_name("Text files");
+		filter_text->add_mime_type("text/plain");
+		dialog.add_filter(filter_text);
+		
+		int result = dialog.run();
+		
+		if(result == Gtk::ResponseType::RESPONSE_OK)
+		{
+			std::string uri = dialog.get_uri();
+			uri.erase(uri.begin(),uri.begin()+7);
+			textEntry.set_text(uri);
+		}
 	}
+}

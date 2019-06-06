@@ -10,10 +10,7 @@ void MockWindow::clickStartButton()
 		startButton.clicked();
 	}
 	
-void MockWindow::showErrorDialog()
-	{
-		
-	}
+void MockWindow::showErrorDialog() {}
 
 void MockWindow::setDecodingMode()
 	{
