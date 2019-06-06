@@ -18,6 +18,10 @@ std::string CodingService::doJob(std::string text, std::string key, Coding mode)
 		int i=0;
 		std::transform(text.begin(),text.end(),text.begin(),
 		[=,&i](char c){
+			if(int(c) < 33)
+			{
+				return int(c);
+			}
 			int code;
 			if(mode == Coding::encoding)
 			{

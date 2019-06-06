@@ -10,7 +10,6 @@ TEST_CASE("Coding service codes given text", "[CodingServiceTests]")
 	{
 		CHECK(service.encode("TEXT", "KEY") == "\"j4\"");
 		CHECK(service.encode("KEY", "TEXT") == "\"j4");
-		CHECK(service.encode("K E Y", "T EXT") == "\" jX0");
 	}
 	SECTION("Decoding")
 	{
@@ -26,5 +25,13 @@ TEST_CASE("Coding service codes given text", "[CodingServiceTests]")
 	{
 		CHECK(service.decode("text", "") == "text");
 		CHECK(service.encode("text", "") == "text");
+	}
+	SECTION("Is the same after decoding")
+	{
+		std::string source = "I forgot to give you roses.\nWhen you hit the floor, you knew the poses.\nAsking for war, have you...";
+		std::string text = source, key = "QWERTY";
+		text = service.encode(text,key);
+		text = service.decode(text,key);
+		CHECK(text == source);
 	}
 }

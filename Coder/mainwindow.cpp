@@ -122,7 +122,7 @@ void MainWindow::setWindow()
 {
 	set_border_width(10);
 	set_resizable(false);
-	set_title("Coder v1.0.1");
+	set_title("Coder v1.1.2");
 	show_all_children();
 }
 

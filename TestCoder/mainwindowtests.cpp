@@ -239,66 +239,32 @@ TEST_CASE("MainWindow prompts appropirate ErrorDialog message when something is 
 TEST_CASE("MainWindow prompts output to EntryOutput after clicking go button", "[MainWindowTests]")
 {
 	MockWindow window;
-	SECTION("Normal output after encoding text")
+	SECTION("Normal output after encoding input")
 	{
 		window.setEncodingMode();
-		window.setEntryInputMode();
 		window.writeToKeyEntry("KEY");
 		window.writeToTextEntry("TEXT");
 		window.clickStartButton();
 		CHECK(window.getOutputEntryText() == "\"j4\"");
 	}
-	SECTION("Normal output after decoding text")
+	SECTION("Normal output after decoding input")
 	{
 		window.setDecodingMode();
-		window.setEntryInputMode();
 		window.writeToKeyEntry("KEY");
 		window.writeToTextEntry("\"j4\"");
 		window.clickStartButton();
 		CHECK(window.getOutputEntryText() == "TEXT");
 	}
-	SECTION("Normal output after encoding file")
+	SECTION("Nothing is changed after encoding bad input")
 	{
 		window.setEncodingMode();
-		window.setFileInputMode();
-		window.writeToKeyEntry("KEY");
-		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/file.txt");
-		window.clickStartButton();
-		CHECK(window.getOutputEntryText() == "~7I3EP3@P5xK;-YB-TB;");
-	}
-	SECTION("Normal output after decoding file")
-	{
-		window.setDecodingMode();
-		window.setFileInputMode();
-		window.writeToKeyEntry("KEY");
-		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/file.txt");
-		window.clickStartButton();
-		CHECK(window.getOutputEntryText() == "(J4:X;:S;<.6B@DI@?IN");
-	}
-	SECTION("Nothing is changed after encoding bad file or empty text")
-	{
-		window.setEncodingMode();
-		window.setFileInputMode();
-		window.writeToKeyEntry("KEY");
-		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/nofile.txt");
-		window.clickStartButton();
-		CHECK(window.getOutputEntryText() == "Nothing here");
-		
-		window.setEntryInputMode();
 		window.writeToTextEntry("");
 		window.clickStartButton();
 		CHECK(window.getOutputEntryText() == "Nothing here");
 	}
-	SECTION("Normal output after decoding empty text")
+	SECTION("Normal output after decoding bad input")
 	{
 		window.setDecodingMode();
-		window.setFileInputMode();
-		window.writeToKeyEntry("KEY");
-		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/nofile.txt");
-		window.clickStartButton();
-		CHECK(window.getOutputEntryText() == "Nothing here");
-		
-		window.setEntryInputMode();
 		window.writeToTextEntry("");
 		window.clickStartButton();
 		CHECK(window.getOutputEntryText() == "Nothing here");
