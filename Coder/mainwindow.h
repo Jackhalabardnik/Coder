@@ -7,6 +7,7 @@
 #include <InputInterferance.h>
 #include <EntryInput.h>
 #include <FileInput.h>
+#include <CodingService.h>
 
 class MainWindow : public Gtk::Window
 {
@@ -44,9 +45,9 @@ private:
 
 	void setErrorDialog();
 
-	void showErrorDialog();
+	virtual void showErrorDialog();
 
-	virtual void doWork();
+	void doWork();
 protected:
 	void transferTextFromEntriesToInput();
 
@@ -72,6 +73,8 @@ protected:
 	EntryInput keyInput, textInputEntryMode;
 
 	FileInput textInputFileMode;
+	
+	CodingService codingService;
 };
 
 #endif

@@ -12,11 +12,11 @@ OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
-User                   :=Jacek
-Date                   :=05/06/19
+User                   :=jacek
+Date                   :=06/06/19
 CodeLitePath           :=/home/jacek/.codelite
-LinkerName             :=/usr/bin/i686-linux-gnu-g++
-SharedObjectLinkerName :=/usr/bin/i686-linux-gnu-g++ -shared -fPIC
+LinkerName             :=/usr/bin/x86_64-linux-gnu-g++
+SharedObjectLinkerName :=/usr/bin/x86_64-linux-gnu-g++ -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.i
@@ -47,20 +47,20 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := /usr/bin/i686-linux-gnu-ar rcu
-CXX      := /usr/bin/i686-linux-gnu-g++
-CC       := /usr/bin/i686-linux-gnu-gcc
+AR       := /usr/bin/x86_64-linux-gnu-ar rcu
+CXX      := /usr/bin/x86_64-linux-gnu-g++ -std=c++14 -Wall
+CC       := /usr/bin/x86_64-linux-gnu-gcc
 CXXFLAGS :=  -O2 -std=c++14 -Wall $(shell pkg-config --cflags gtkmm-3.0) $(Preprocessors)
 CFLAGS   :=  -O2 -fopenmp -std=c++14 -Wall $(Preprocessors)
 ASFLAGS  := 
-AS       := /usr/bin/i686-linux-gnu-as
+AS       := /usr/bin/x86_64-linux-gnu-as
 
 
 ##
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/mainwindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/EntryInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/FileInput.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/mainwindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/EntryInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/FileInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/CodingService.cpp$(ObjectSuffix) 
 
 
 
@@ -122,6 +122,14 @@ $(IntermediateDirectory)/FileInput.cpp$(DependSuffix): FileInput.cpp
 
 $(IntermediateDirectory)/FileInput.cpp$(PreprocessSuffix): FileInput.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/FileInput.cpp$(PreprocessSuffix) FileInput.cpp
+
+$(IntermediateDirectory)/CodingService.cpp$(ObjectSuffix): CodingService.cpp $(IntermediateDirectory)/CodingService.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/Coder/CodingService.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/CodingService.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/CodingService.cpp$(DependSuffix): CodingService.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/CodingService.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/CodingService.cpp$(DependSuffix) -MM CodingService.cpp
+
+$(IntermediateDirectory)/CodingService.cpp$(PreprocessSuffix): CodingService.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/CodingService.cpp$(PreprocessSuffix) CodingService.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

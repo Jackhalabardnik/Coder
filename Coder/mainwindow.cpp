@@ -171,6 +171,17 @@ void MainWindow::doWork()
 	{
 		showErrorDialog();
 	}
+	else
+	{
+		if(doEncoding.get_active())
+		{
+			outputEntry.set_text(codingService.encode(textInput->getText(),keyInput.getText()));
+		} 
+		else
+		{
+			outputEntry.set_text(codingService.decode(textInput->getText(),keyInput.getText()));
+		}
+	}
 }
 
 void MainWindow::transferTextFromEntriesToInput()

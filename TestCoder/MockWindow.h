@@ -10,7 +10,7 @@ public:
 	void clickExitButton();
 	void clickStartButton();
 	
-	void doWork() override;
+	void showErrorDialog() override;
 	
 	void setDecodingMode();
 	void setEncodingMode();
@@ -28,6 +28,7 @@ public:
 	
 	std::string getTextInputText();
 	std::string getKeyInputText();
+	std::string getOutputEntryText();
 
 	std::string getKeyEntryLabelText();
 	std::string getTextEntryLabelText();

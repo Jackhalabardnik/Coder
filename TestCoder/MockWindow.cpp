@@ -10,9 +10,9 @@ void MockWindow::clickStartButton()
 		startButton.clicked();
 	}
 	
-void MockWindow::doWork()
+void MockWindow::showErrorDialog()
 	{
-		transferTextFromEntriesToInput();
+		
 	}
 
 void MockWindow::setDecodingMode()
@@ -46,19 +46,19 @@ void MockWindow::writeToKeyEntry(std::string text)
 	}
 	
 bool MockWindow::hasKeyEntryGoodText()
-{
-	return keyInput.isInputGood();
-}
+	{
+		return keyInput.isInputGood();
+	}
 
 void MockWindow::writeToTextEntry(std::string text)
-{
-	textEntry.set_text(text);
-}
+	{
+		textEntry.set_text(text);
+	}
 	
 bool MockWindow::hasTextEntryGoodText()
-{
-	return textInput->isInputGood();
-}
+	{
+		return textInput->isInputGood();
+	}
 	
 std::string MockWindow::getTextInputText()
 	{
@@ -67,7 +67,12 @@ std::string MockWindow::getTextInputText()
 
 std::string MockWindow::getKeyInputText()
 	{
-	return keyInput.getText();
+		return keyInput.getText();
+	}
+
+std::string MockWindow::getOutputEntryText()
+	{
+		return outputEntry.get_text();
 	}
 
 std::string MockWindow::getKeyEntryLabelText()
