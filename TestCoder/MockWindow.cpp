@@ -10,6 +10,11 @@ void MockWindow::clickStartButton()
 		startButton.clicked();
 	}
 	
+bool MockWindow::isOpenChooseFileDialogVisible()
+	{
+		return openChooseFileDialog.get_visible();
+	}
+
 void MockWindow::showErrorDialog() {}
 
 void MockWindow::setDecodingMode()

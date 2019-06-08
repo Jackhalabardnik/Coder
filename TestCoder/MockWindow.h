@@ -10,6 +10,8 @@ public:
 	void clickExitButton();
 	void clickStartButton();
 	
+	bool isOpenChooseFileDialogVisible();
+	
 	void showErrorDialog() override;
 	
 	void setDecodingMode();

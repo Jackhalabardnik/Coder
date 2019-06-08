@@ -19,6 +19,8 @@ void MainWindow::setGUI()
 		fillMainGrid();
 
 		setWindow();
+
+		showEverythingAtCreation();
 }
 
 void MainWindow::setChooseInputGrid()
@@ -137,8 +139,24 @@ void MainWindow::setWindow()
 	set_border_width(10);
 	set_size_request(300,400);
 	set_resizable(false);
-	set_title("Coder v1.1.2");
-	show_all_children();
+	set_title("Coder v1.1.4");
+}
+
+void MainWindow::showEverythingAtCreation()
+{
+	exitButton.show();
+	startButton.show();
+	outputEntryLabel.show();
+	outputTextView.show();
+	scrolledWindow.show();
+	keyEntryLabel.show();
+	keyEntry.show();
+	textEntryLabel.show();
+	textEntry.show();
+	chooseMethodGrid.show_all();
+	chooseInputGrid.show_all();
+	mainGrid.show();
+	show();
 }
 
 void MainWindow::updateLabels()
@@ -158,6 +176,7 @@ void MainWindow::updateLabels()
 
 void MainWindow::updateInputMode()
 {
+	openChooseFileDialog.set_visible(readFromFile.get_active());
 	updateInput();
 	updateWorkMode();
 }

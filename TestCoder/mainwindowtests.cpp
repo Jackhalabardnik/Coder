@@ -270,3 +270,22 @@ TEST_CASE("MainWindow prompts output to EntryOutput after clicking go button", "
 		CHECK(window.getOutputEntryText() == "Nothing here");
 	}
 }
+
+TEST_CASE("Is openChooserFileDialog visible only when readFromFile is active", "[MainWindowTests]")
+{
+	MockWindow window;
+	SECTION("After creation window is in EntryInput mode OpenChooserFileDialog is invisible")
+	{
+		CHECK(window.isOpenChooseFileDialogVisible() == false);
+	}
+	window.setFileInputMode();
+	SECTION("Window is in FileInput mode => OpenChooserFileDialog is visible")
+	{
+		CHECK(window.isOpenChooseFileDialogVisible() == true);
+	}
+	window.setEntryInputMode();
+	SECTION("Window is in EntryInput mode => OpenChooserFileDialog is invisible")
+	{
+		CHECK(window.isOpenChooseFileDialogVisible() == false);
+	}
+}

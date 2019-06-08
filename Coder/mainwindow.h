@@ -37,6 +37,8 @@ private:
 
 	void setWindow();
 
+	void showEverythingAtCreation();
+
 	void updateInputMode();
 
 	void updateInput();
