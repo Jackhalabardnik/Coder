@@ -82,7 +82,7 @@ void MainWindow::setInputInterferance()
 
 void MainWindow::setOutInfo()
 {
-	outputEntryLabel.set_text("Encoded text:");
+	outputEntryLabel.set_text("Result:");
 	setTextToTextBuffer("Nothing here");
 	outputTextView.set_editable(false);
 	scrolledWindow.add(outputTextView);
@@ -103,8 +103,8 @@ void MainWindow::setButtons()
 	startButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::doWork));
 	exitButton.set_label("Exit");
 	exitButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::close));
-	openChooseFileDialog.set_label("...");
-	openChooseFileDialog.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::chooseFileFromADialog));
+	openChooseSourceFileDialog.set_label("...");
+	openChooseSourceFileDialog.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::chooseSourceFileFromADialog));
 }
 
 void MainWindow::setMainGrid()
@@ -121,7 +121,7 @@ void MainWindow::fillMainGrid()
 		mainGrid.attach(keyEntry,1, 2, 4,1);
 		mainGrid.attach(textEntryLabel,3,3, 1,1);
 		mainGrid.attach(textEntry,1,4,4,1);
-		mainGrid.attach(openChooseFileDialog, 5,4,1,1);
+		mainGrid.attach(openChooseSourceFileDialog, 5,4,1,1);
 
 		mainGrid.attach(chooseMethodGrid,2,5,1,1);
 		mainGrid.attach(chooseInputGrid,4, 5, 1, 1);
@@ -159,24 +159,16 @@ void MainWindow::showEverythingAtCreation()
 	show();
 }
 
-void MainWindow::updateLabels()
+void MainWindow::updateInputTextLabel()
 {
 	std::string input_text = readFromEntry.get_active() ? "text" : "non-relative path to file";
-	if(doEncoding.get_active())
-	{
-		textEntryLabel.set_text(std::string("Enter " + input_text + " to encode:"));
-		outputEntryLabel.set_text("Encoded text:");
-	}
-	else
-	{
-		textEntryLabel.set_text(std::string("Enter " + input_text + " to decode:"));
-		outputEntryLabel.set_text("Decoded text:");
-	}
+	std::string code_method = doEncoding.get_active() ? "encode" : "decode";
+	textEntryLabel.set_text(std::string("Enter " + input_text + " to " + code_method +":"));
 }
 
 void MainWindow::updateInputMode()
 {
-	openChooseFileDialog.set_visible(readFromFile.get_active());
+	openChooseSourceFileDialog.set_visible(readFromFile.get_active());
 	updateInput();
 	updateWorkMode();
 }
@@ -195,7 +187,7 @@ void MainWindow::updateInput()
 
 void MainWindow::updateWorkMode()
 {
-	updateLabels();
+	updateInputTextLabel();
 }
 
 void MainWindow::doWork()
@@ -261,7 +253,7 @@ std::string MainWindow::getMinorErrorMessage()
 		return message;
 }
 
-void MainWindow::chooseFileFromADialog()
+void MainWindow::chooseSourceFileFromADialog()
 {
 	if(readFromFile.get_active())
 	{

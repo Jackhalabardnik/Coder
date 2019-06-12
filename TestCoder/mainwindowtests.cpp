@@ -10,49 +10,25 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" )
 	MockWindow window;
 	SECTION("Sets labels by defualt to EntryInput-Encoding mode")
 	{
-		CHECK( window.getKeyEntryLabelText() == "Enter your key:" );
 		CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
-		CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
-	}
-	
-	window.setDecodingMode();
-	SECTION("Sets labels to decode method")
-	{
-		CHECK( window.getKeyEntryLabelText() == "Enter your key:" );
-		CHECK( window.getTextEntryLabelText() == "Enter text to decode:" );
-		CHECK( window.getOutputEntryLabelText() == "Decoded text:" );
-	}
-	
-	window.setEncodingMode();
-	SECTION("Could set labels back to encoding mode")
-	{
-		CHECK( window.getKeyEntryLabelText() == "Enter your key:" );
-		CHECK( window.getTextEntryLabelText() == "Enter text to encode:" );
-		CHECK( window.getOutputEntryLabelText() == "Encoded text:" );
 	}
 	
 	window.setFileInputMode();
-	SECTION("Changes textEntry label to file input in encoding mode")
+	SECTION("Changes textEntry label to file input in both modes")
 	{
+		window.setEncodingMode();
 		CHECK(window.getTextEntryLabelText() == "Enter non-relative path to file to encode:");
-	}
-	
-	window.setDecodingMode();
-	SECTION("Changes textEntry label to file input in decoding mode")
-	{
+		window.setDecodingMode();
 		CHECK(window.getTextEntryLabelText() == "Enter non-relative path to file to decode:");
 	}
 	
 	window.setEntryInputMode();
-	SECTION("Changes textEntry label to entry input in decoding mode")
+	SECTION("Changes textEntry label to entry input in both modes")
 	{
-		CHECK(window.getTextEntryLabelText() == "Enter text to decode:");
-	}
-	
-	window.setEncodingMode();
-	SECTION("Changes textEntry label to entry input in encoding mode")
-	{
+		window.setEncodingMode();
 		CHECK(window.getTextEntryLabelText() == "Enter text to encode:");
+		window.setDecodingMode();
+		CHECK(window.getTextEntryLabelText() == "Enter text to decode:");
 	}
 }
 

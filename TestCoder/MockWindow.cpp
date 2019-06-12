@@ -12,7 +12,7 @@ void MockWindow::clickStartButton()
 	
 bool MockWindow::isOpenChooseFileDialogVisible()
 	{
-		return openChooseFileDialog.get_visible();
+		return openChooseSourceFileDialog.get_visible();
 	}
 
 void MockWindow::showErrorDialog() {}

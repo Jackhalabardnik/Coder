@@ -45,9 +45,9 @@ private:
 
 	void updateWorkMode();
 
-	void updateLabels();
+	void updateInputTextLabel();
 
-	void chooseFileFromADialog();
+	void chooseSourceFileFromADialog();
 
 	virtual void showErrorDialog();
 
@@ -62,7 +62,7 @@ protected:
 	bool isError();
 
 
-	Gtk::Button startButton, exitButton, openChooseFileDialog;
+	Gtk::Button startButton, exitButton, openChooseSourceFileDialog;
 
 	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, chooseInputLabel, choseWorkModeLabel;
 
