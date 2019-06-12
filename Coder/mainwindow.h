@@ -23,6 +23,8 @@ private:
 
 	void setChooseMethodGrid();
 
+	void setChooseOutputGrid();
+
 	void setEntry();
 
 	void setInputInterferance();
@@ -32,6 +34,8 @@ private:
 	void setTextToTextBuffer(std::string text);
 
 	void setButtons();
+
+	void setHelpLabel();
 
 	void fillMainGrid();
 
@@ -46,6 +50,8 @@ private:
 	void updateWorkMode();
 
 	void updateInputTextLabel();
+
+	void updateHelpLabel();
 
 	void chooseSourceFileFromADialog();
 
@@ -64,9 +70,9 @@ protected:
 
 	Gtk::Button startButton, exitButton, openChooseSourceFileDialog;
 
-	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, chooseInputLabel, choseWorkModeLabel;
+	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, helpLabel;
 
-	Gtk::RadioButton doEncoding, doDecoding, readFromEntry, readFromFile;
+	Gtk::RadioButton doEncoding, doDecoding, readFromEntry, readFromFile, writeToTextBox, writeToFileAndTextBox;
 
 	Gtk::Entry keyEntry, textEntry;
 
@@ -74,7 +80,7 @@ protected:
 
 	Gtk::ScrolledWindow scrolledWindow;
 
-	Gtk::Grid mainGrid, chooseInputGrid, chooseMethodGrid;
+	Gtk::Grid mainGrid, chooseInputGrid, chooseOutputGrid, chooseMethodGrid;
 
 	std::shared_ptr<InputInterferance> textInput;
 

@@ -11,6 +11,7 @@ public:
 	void clickStartButton();
 	
 	bool isOpenChooseFileDialogVisible();
+	bool isHelpLabelVisible();
 	
 	void showErrorDialog() override;
 	
@@ -19,6 +20,9 @@ public:
 	
 	void setEntryInputMode();
 	void setFileInputMode();
+	
+	void setOutputToTextbox();
+	void setOutputToFile();
 	
 	void writeToTextInput(std::string text);
 	
@@ -32,9 +36,7 @@ public:
 	std::string getKeyInputText();
 	std::string getOutputEntryText();
 
-	std::string getKeyEntryLabelText();
 	std::string getTextEntryLabelText();
-	std::string getOutputEntryLabelText();
 	
 	std::string getMajorErrorMessage();
 	std::string getMinorErrorMessage();

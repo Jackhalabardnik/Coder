@@ -32,6 +32,25 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" )
 	}
 }
 
+TEST_CASE("MainWindow shows helpLabel only when output to file is active")
+{
+	MockWindow window;
+	SECTION("After creation label is hidden => textbox output mode")
+	{
+		CHECK(window.isHelpLabelVisible() == false);
+	}
+	window.setOutputToFile();
+	SECTION("In file&textbox output mode help label is visible")
+	{
+		CHECK(window.isHelpLabelVisible() == true);
+	}
+	window.setOutputToTextbox();
+	SECTION("In textbox output mode help label is hidden")
+	{
+		CHECK(window.isHelpLabelVisible() == false);
+	}
+}
+
 TEST_CASE("MainWindow updates InputInterferance", "[MainWindowTests]" )
 {
 	MockWindow window;

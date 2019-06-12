@@ -14,6 +14,11 @@ bool MockWindow::isOpenChooseFileDialogVisible()
 	{
 		return openChooseSourceFileDialog.get_visible();
 	}
+	
+bool MockWindow::isHelpLabelVisible()
+	{
+		return helpLabel.get_visible();
+	}
 
 void MockWindow::showErrorDialog() {}
 
@@ -25,6 +30,16 @@ void MockWindow::setDecodingMode()
 void MockWindow::setEncodingMode()
 	{
 		doEncoding.set_active();
+	}
+	
+void MockWindow::setOutputToTextbox()
+	{
+		writeToTextBox.set_active();
+	}
+
+void MockWindow::setOutputToFile()
+	{
+		writeToFileAndTextBox.set_active();
 	}
 	
 void MockWindow::setEntryInputMode()
@@ -77,17 +92,9 @@ std::string MockWindow::getOutputEntryText()
 		return outputTextView.get_buffer()->get_text();
 	}
 
-std::string MockWindow::getKeyEntryLabelText()
-	{
-		return keyEntryLabel.get_text();
-	}
 std::string MockWindow::getTextEntryLabelText()
 	{
 		return textEntryLabel.get_text();
-	}
-std::string MockWindow::getOutputEntryLabelText()
-	{
-		return outputEntryLabel.get_text();
 	}
 	
 std::string MockWindow::getMajorErrorMessage()

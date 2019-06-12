@@ -9,11 +9,13 @@ void MainWindow::setGUI()
 {
 		setChooseMethodGrid();
 		setChooseInputGrid();
+		setChooseOutputGrid();
 		setEntry();
 		setInputInterferance();
 		setOutInfo();
 
 		setButtons();
+		setHelpLabel();
 
 		setMainGrid();
 		fillMainGrid();
@@ -25,10 +27,10 @@ void MainWindow::setGUI()
 
 void MainWindow::setChooseInputGrid()
 {
-	chooseInputLabel.set_text("Choose input: ");
+	auto label = Gtk::manage(new Gtk::Label("Choose input:"));
 
-	readFromFile.set_label("readFromFile");
-	readFromEntry.set_label("readFromEntry");
+	readFromFile.set_label("File");
+	readFromEntry.set_label("Textbox");
 	
 	readFromEntry.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateInputMode));
 	readFromFile.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateInputMode));
@@ -38,15 +40,15 @@ void MainWindow::setChooseInputGrid()
 
 	chooseInputGrid.set_row_spacing(3);
 
-	chooseInputGrid.attach(chooseInputLabel, 0,0,1,1);
-	chooseInputGrid.attach_next_to(readFromEntry, chooseInputLabel,Gtk::PositionType::POS_BOTTOM ,1,1);
+	chooseInputGrid.attach(*label, 0,0,1,1);
+	chooseInputGrid.attach_next_to(readFromEntry, *label,Gtk::PositionType::POS_BOTTOM ,1,1);
 	chooseInputGrid.attach_next_to(readFromFile, readFromEntry,Gtk::PositionType::POS_BOTTOM ,1,1);
 
 }
 
 void MainWindow::setChooseMethodGrid()
 {
-	choseWorkModeLabel.set_text("Choose work mode: ");
+	auto label = Gtk::manage(new Gtk::Label("Choose work mode: "));
 
 	doDecoding.set_label("Decoding");
 	doEncoding.set_label("Encoding");
@@ -59,9 +61,29 @@ void MainWindow::setChooseMethodGrid()
 
 	chooseMethodGrid.set_row_spacing(3);
 
-	chooseMethodGrid.attach(choseWorkModeLabel, 0,0,1,1);
-	chooseMethodGrid.attach_next_to(doEncoding, choseWorkModeLabel,Gtk::PositionType::POS_BOTTOM ,1,1);
+	chooseMethodGrid.attach(*label, 0,0,1,1);
+	chooseMethodGrid.attach_next_to(doEncoding, *label,Gtk::PositionType::POS_BOTTOM ,1,1);
 	chooseMethodGrid.attach_next_to(doDecoding, doEncoding,Gtk::PositionType::POS_BOTTOM ,1,1);
+}
+
+void MainWindow::setChooseOutputGrid()
+{
+	auto label = Gtk::manage(new Gtk::Label("Choose output place: "));
+
+	writeToFileAndTextBox.set_label("File & Textbox");
+	writeToTextBox.set_label("Textbox");
+
+	writeToFileAndTextBox.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateHelpLabel));
+	writeToTextBox.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateHelpLabel));
+
+	writeToFileAndTextBox.join_group(writeToTextBox);
+	writeToTextBox.set_active();
+
+	chooseOutputGrid.set_row_spacing(3);
+
+	chooseOutputGrid.attach(*label, 0,0,1,1);
+	chooseOutputGrid.attach_next_to(writeToTextBox, *label,Gtk::PositionType::POS_BOTTOM ,1,1);
+	chooseOutputGrid.attach_next_to(writeToFileAndTextBox, writeToTextBox,Gtk::PositionType::POS_BOTTOM ,1,1);
 }
 
 void MainWindow::setEntry()
@@ -107,6 +129,11 @@ void MainWindow::setButtons()
 	openChooseSourceFileDialog.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::chooseSourceFileFromADialog));
 }
 
+void MainWindow::setHelpLabel()
+{
+	helpLabel.set_text("Click GO, then choose output file");
+}
+
 void MainWindow::setMainGrid()
 {
 		mainGrid.set_column_spacing(5);
@@ -119,12 +146,13 @@ void MainWindow::fillMainGrid()
 {
 		mainGrid.attach(keyEntryLabel, 3, 1,1,1);
 		mainGrid.attach(keyEntry,1, 2, 4,1);
-		mainGrid.attach(textEntryLabel,3,3, 1,1);
+		mainGrid.attach(textEntryLabel,1,3, 4,1);
 		mainGrid.attach(textEntry,1,4,4,1);
 		mainGrid.attach(openChooseSourceFileDialog, 5,4,1,1);
 
 		mainGrid.attach(chooseMethodGrid,2,5,1,1);
-		mainGrid.attach(chooseInputGrid,4, 5, 1, 1);
+		mainGrid.attach(chooseInputGrid,3, 5, 1, 1);
+		mainGrid.attach(chooseOutputGrid,4, 5, 1, 1);
 
 		mainGrid.attach(startButton, 2, 6, 4,1);
 
@@ -132,6 +160,7 @@ void MainWindow::fillMainGrid()
 		mainGrid.attach(scrolledWindow,2, 8, 5,3);
 
 		mainGrid.attach(exitButton, 2, 12, 4,1);
+		mainGrid.attach(helpLabel, 1, 13, 4,1);
 }
 
 void MainWindow::setWindow()
@@ -155,6 +184,7 @@ void MainWindow::showEverythingAtCreation()
 	textEntry.show();
 	chooseMethodGrid.show_all();
 	chooseInputGrid.show_all();
+	chooseOutputGrid.show_all();
 	mainGrid.show();
 	show();
 }
@@ -164,6 +194,11 @@ void MainWindow::updateInputTextLabel()
 	std::string input_text = readFromEntry.get_active() ? "text" : "non-relative path to file";
 	std::string code_method = doEncoding.get_active() ? "encode" : "decode";
 	textEntryLabel.set_text(std::string("Enter " + input_text + " to " + code_method +":"));
+}
+
+void MainWindow::updateHelpLabel()
+{
+	helpLabel.set_visible(writeToFileAndTextBox.get_active());
 }
 
 void MainWindow::updateInputMode()
