@@ -243,12 +243,10 @@ void MainWindow::doWork()
 		if(writeToFileAndTextBox.get_active())
 		{
 			std::string path = askUserForPathToOutputFile();
-			writeToFile(path,output);
 			if(path.empty() == false)
 			{
 				writeToFile(path,output);
 			}
-			writeToFile(path,output); 
 		}
 	}
 }
