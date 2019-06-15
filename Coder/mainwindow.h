@@ -59,6 +59,7 @@ private:
 
 	void doWork();
 protected:
+
 	void transferTextFromEntriesToInput();
 
 	std::string getMajorErrorMessage();

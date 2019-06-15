@@ -228,20 +228,17 @@ void MainWindow::updateWorkMode()
 void MainWindow::doWork()
 {
 	transferTextFromEntriesToInput();
+	
 	if(isError())
 	{
 		showErrorDialog();
 	}
 	else
 	{
-		if(doEncoding.get_active())
-		{
-			setTextToTextBuffer(codingService.encode(textInput->getText(),keyInput.getText()));
-		} 
-		else
-		{
-			setTextToTextBuffer(codingService.decode(textInput->getText(),keyInput.getText()));
-		}
+		std::string key = keyInput.getText();
+		std::string text = textInput->getText();
+		std::string output = doEncoding.get_active() ? codingService.encode(text,key) : codingService.decode(text,key);
+		setTextToTextBuffer(output);
 	}
 }
 
@@ -258,10 +255,13 @@ bool MainWindow::isError()
 
 void MainWindow::showErrorDialog()
 {
-	Gtk::MessageDialog dialog(*this,"Nothing", false, Gtk::MessageType::MESSAGE_ERROR, Gtk::ButtonsType::BUTTONS_CLOSE, false);
-	dialog.set_message(getMajorErrorMessage());
-	dialog.set_secondary_text(getMinorErrorMessage());
-	dialog.run();
+	if(isError())
+	{
+		Gtk::MessageDialog dialog(*this,"Nothing", false, Gtk::MessageType::MESSAGE_ERROR, Gtk::ButtonsType::BUTTONS_CLOSE, false);
+		dialog.set_message(getMajorErrorMessage());
+		dialog.set_secondary_text(getMinorErrorMessage());
+		dialog.run();
+	}
 }
 
 std::string MainWindow::getMajorErrorMessage()
@@ -290,26 +290,24 @@ std::string MainWindow::getMinorErrorMessage()
 
 void MainWindow::chooseSourceFileFromADialog()
 {
-	if(readFromFile.get_active())
+	Gtk::FileChooserDialog dialog("Please choose a text file", Gtk::FILE_CHOOSER_ACTION_OPEN);
+	dialog.set_transient_for(*this);
+
+	dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+	dialog.add_button("_Open", Gtk::RESPONSE_OK);
+
+	auto filter_text = Gtk::FileFilter::create();
+	filter_text->set_name("Text files");
+	filter_text->add_mime_type("text/plain");
+	dialog.add_filter(filter_text);
+	
+	int result = dialog.run();
+	
+	if(result == Gtk::ResponseType::RESPONSE_OK)
 	{
-		 Gtk::FileChooserDialog dialog("Please choose a text file", Gtk::FILE_CHOOSER_ACTION_OPEN);
-		dialog.set_transient_for(*this);
-
-		dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
-		dialog.add_button("_Open", Gtk::RESPONSE_OK);
-
-		auto filter_text = Gtk::FileFilter::create();
-		filter_text->set_name("Text files");
-		filter_text->add_mime_type("text/plain");
-		dialog.add_filter(filter_text);
-		
-		int result = dialog.run();
-		
-		if(result == Gtk::ResponseType::RESPONSE_OK)
-		{
-			std::string uri = dialog.get_uri();
-			uri.erase(uri.begin(),uri.begin()+7);
-			textEntry.set_text(uri);
-		}
+		std::string uri = dialog.get_uri();
+		uri.erase(uri.begin(),uri.begin()+7);
+		textEntry.set_text(uri);
 	}
 }
+

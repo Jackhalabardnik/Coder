@@ -284,3 +284,4 @@ TEST_CASE("Is openChooserFileDialog visible only when readFromFile is active", "
 		CHECK(window.isOpenChooseFileDialogVisible() == false);
 	}
 }
+
