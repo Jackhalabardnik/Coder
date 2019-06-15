@@ -13,6 +13,8 @@ public:
 	bool isOpenChooseFileDialogVisible();
 	bool isHelpLabelVisible();
 	
+	void writeToFile(std::string path, std::string text);
+	
 	void showErrorDialog() override;
 	
 	void setDecodingMode();

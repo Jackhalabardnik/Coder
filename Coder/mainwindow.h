@@ -55,10 +55,14 @@ private:
 
 	void chooseSourceFileFromADialog();
 
+ std::string askUserForPathToOutputFile();
+
 	virtual void showErrorDialog();
 
 	void doWork();
 protected:
+
+	void writeToFile(std::string path, std::string text);
 
 	void transferTextFromEntriesToInput();
 

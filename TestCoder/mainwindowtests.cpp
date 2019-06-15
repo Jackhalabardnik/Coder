@@ -5,7 +5,7 @@
 
 Glib::RefPtr<Gtk::Application> app = Gtk::Application::create("I have to add this in order to make gtkmm going");
 
-TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" ) 
+TEST_CASE( "Labels are updated", "[MainWindowTests]" ) 
 {
 	MockWindow window;
 	SECTION("Sets labels by defualt to EntryInput-Encoding mode")
@@ -32,7 +32,7 @@ TEST_CASE( "MainWindow labels are updated", "[MainWindowTests]" )
 	}
 }
 
-TEST_CASE("MainWindow shows helpLabel only when output to file is active")
+TEST_CASE("Shows helpLabel only when output to file is active")
 {
 	MockWindow window;
 	SECTION("After creation label is hidden => textbox output mode")
@@ -51,7 +51,7 @@ TEST_CASE("MainWindow shows helpLabel only when output to file is active")
 	}
 }
 
-TEST_CASE("MainWindow updates InputInterferance", "[MainWindowTests]" )
+TEST_CASE("Updates InputInterferance", "[MainWindowTests]" )
 {
 	MockWindow window;
 	window.writeToTextInput("message");
@@ -133,7 +133,7 @@ TEST_CASE("TextInput workflow works", "[MainWindowTests]")
 	}
 }
 
-TEST_CASE("MainWindows recognises error state", "[MainWindowTests]")
+TEST_CASE("Recognises error state", "[MainWindowTests]")
 {
 	MockWindow window;
 	window.setEntryInputMode();
@@ -183,7 +183,7 @@ TEST_CASE("MainWindows recognises error state", "[MainWindowTests]")
 	}
 }
 
-TEST_CASE("MainWindow prompts appropirate ErrorDialog message when something is not ok", "[MainWindowTests]")
+TEST_CASE("Prompts appropirate ErrorDialog message when something is not ok", "[MainWindowTests]")
 {
 	MockWindow window;
 	SECTION("Major message changes as code mode changes")
@@ -231,7 +231,7 @@ TEST_CASE("MainWindow prompts appropirate ErrorDialog message when something is 
 	}
 }
 
-TEST_CASE("MainWindow prompts output to EntryOutput after clicking go button", "[MainWindowTests]")
+TEST_CASE("Prompts output to EntryOutput after clicking go button", "[MainWindowTests]")
 {
 	MockWindow window;
 	SECTION("Normal output after encoding input")
@@ -285,3 +285,22 @@ TEST_CASE("Is openChooserFileDialog visible only when readFromFile is active", "
 	}
 }
 
+TEST_CASE("Writes to file coded text, path is always good", "[MainWindowTests]")
+{
+	MockWindow window;
+	FileInput input;
+	std::string test_1 = "Simple but true";
+	std::string test_2 = "Repetetive\n but\n true";
+	SECTION("Test if write method erases file before writting")
+	{
+		window.writeToFile("/home/jacek/CLP/Coder/TestCoder/writeFile.txt", test_1);
+		input.setText("/home/jacek/CLP/Coder/TestCoder/writeFile.txt");
+		CHECK(input.getText() == test_1);
+	}
+	SECTION("Test if write method writes enters")
+	{
+		window.writeToFile("/home/jacek/CLP/Coder/TestCoder/writeFile.txt", test_2);
+		input.setText("/home/jacek/CLP/Coder/TestCoder/writeFile.txt");
+		CHECK(input.getText() == test_2);
+	}
+}

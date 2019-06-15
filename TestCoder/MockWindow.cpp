@@ -19,6 +19,11 @@ bool MockWindow::isHelpLabelVisible()
 	{
 		return helpLabel.get_visible();
 	}
+	
+void MockWindow::writeToFile(std::string path, std::string text)
+	{
+		MainWindow::writeToFile(path, text);
+	}
 
 void MockWindow::showErrorDialog() {}
 

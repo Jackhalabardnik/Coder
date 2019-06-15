@@ -311,3 +311,35 @@ void MainWindow::chooseSourceFileFromADialog()
 	}
 }
 
+std::string MainWindow::askUserForPathToOutputFile()
+{
+	Gtk::FileChooserDialog dialog("Please choose a text file", Gtk::FILE_CHOOSER_ACTION_OPEN);
+	dialog.set_transient_for(*this);
+
+	dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+	dialog.add_button("_Open", Gtk::RESPONSE_OK);
+
+	auto filter_text = Gtk::FileFilter::create();
+	filter_text->set_name("Text files");
+	filter_text->add_mime_type("text/plain");
+	dialog.add_filter(filter_text);
+	
+	int result = dialog.run();
+	
+	std::string uri;
+	
+	if(result == Gtk::ResponseType::RESPONSE_OK)
+	{
+		uri = dialog.get_uri();
+		uri.erase(uri.begin(),uri.begin()+7);
+	}
+	return uri;
+}
+
+void MainWindow::writeToFile(std::string path, std::string text)
+{
+	std::fstream stream;
+	stream.open(path, std::fstream::out | std::fstream::trunc);
+	stream << text << "\n";
+	stream.close();
+}

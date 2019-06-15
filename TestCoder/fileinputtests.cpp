@@ -24,8 +24,13 @@ TEST_CASE("Basic FileInput workflow works", "[FileInputTests]")
 	{
 		CHECK(input.isInputGood() == false);
 	}
+	input.setText("/home/jacek/CLP/Coder/TestCoder/hardfile.txt");
+	SECTION("Returnes file text in line")
+	{
+		CHECK(input.getText() == "Simple but true");
+	}
 	input.setText("/home/jacek/CLP/Coder/TestCoder/file.txt");
-	SECTION("Returnes file text")
+	SECTION("Returnes file text with enters")
 	{
 		CHECK(input.getText() == "Some text\nSome texts");
 	}
