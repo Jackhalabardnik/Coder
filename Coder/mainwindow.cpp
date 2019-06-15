@@ -168,7 +168,7 @@ void MainWindow::setWindow()
 	set_border_width(10);
 	set_size_request(300,400);
 	set_resizable(false);
-	set_title("Coder v1.1.4");
+	set_title("Coder v1.2.4");
 }
 
 void MainWindow::showEverythingAtCreation()
@@ -239,6 +239,12 @@ void MainWindow::doWork()
 		std::string text = textInput->getText();
 		std::string output = doEncoding.get_active() ? codingService.encode(text,key) : codingService.decode(text,key);
 		setTextToTextBuffer(output);
+		
+		if(writeToFileAndTextBox.get_active())
+		{
+			std::string path = askUserForPathToOutputFile();
+			writeToFile(path,output);
+		}
 	}
 }
 
