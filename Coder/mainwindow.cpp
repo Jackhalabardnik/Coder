@@ -322,6 +322,27 @@ void MainWindow::chooseSourceFileFromADialog()
 
 std::string MainWindow::askUserForPathToOutputFile()
 {
+	Gtk::MessageDialog dialog(*this, "Create new or choose exsisting file?", false, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_CANCEL,false);
+	dialog.add_button("Create new", 1);
+	dialog.add_button("Choose exsisting", 2);
+	int response = dialog.run();
+	std::string uri;
+	
+	if(response == 1)
+	{
+		chooseFolderFromDialog();
+		uri += askUserForNewFileName();
+	}
+	if(response == 2)
+	{
+		uri = chooseTextFileFromDialog();
+	}
+	helpLabel.set_text(uri);
+	return uri;
+}
+
+std::string MainWindow::chooseTextFileFromDialog()
+{
 	Gtk::FileChooserDialog dialog("Please choose a text file", Gtk::FILE_CHOOSER_ACTION_OPEN);
 	dialog.set_transient_for(*this);
 
@@ -344,6 +365,49 @@ std::string MainWindow::askUserForPathToOutputFile()
 	}
 	return uri;
 }
+ 
+std::string MainWindow::chooseFolderFromDialog()
+{
+	Gtk::FileChooserDialog dialog("Please choose a text file", Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
+	dialog.set_transient_for(*this);
+
+	dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+	dialog.add_button("_Select", Gtk::RESPONSE_OK);
+	
+	int result = dialog.run();
+	
+	std::string uri;
+	
+	if(result == Gtk::ResponseType::RESPONSE_OK)
+	{
+		uri = dialog.get_uri();
+		uri.erase(uri.begin(),uri.begin()+7);
+	}
+	return uri;
+}
+ 
+ 
+std::string MainWindow::askUserForNewFileName()
+{
+	Gtk::MessageDialog dialog(*this, "Type new file name", false, Gtk::MessageType::MESSAGE_OTHER, Gtk::BUTTONS_OK_CANCEL,false);
+	
+	auto entry = Gtk::manage(new Gtk::Entry);
+	entry->show();
+	
+	dialog.get_content_area()->pack_start(*entry, true, true, 1);
+	
+	
+	int response = dialog.run();
+	std::string uri;
+	
+	if(response == Gtk::RESPONSE_OK)
+	{
+		uri = entry->get_text();
+	}
+	
+	return uri;
+}
+
 
 void MainWindow::writeToFile(std::string path, std::string text)
 {

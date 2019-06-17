@@ -55,8 +55,14 @@ private:
 
 	void chooseSourceFileFromADialog();
 
- std::string askUserForPathToOutputFile();
-
+	std::string askUserForPathToOutputFile();
+ 
+	std::string chooseTextFileFromDialog();
+ 
+	std::string chooseFolderFromDialog();
+ 
+	std::string askUserForNewFileName();
+ 
 	virtual void showErrorDialog();
 
 	void doWork();
