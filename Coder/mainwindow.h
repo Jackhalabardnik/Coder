@@ -35,7 +35,7 @@ private:
 
 	void setButtons();
 
-	void setHelpLabel();
+	void setPathLabel();
 
 	void fillMainGrid();
 
@@ -51,15 +51,11 @@ private:
 
 	void updateInputTextLabel();
 
-	void updateHelpLabel();
+	void updateOutcomeMode();
 
 	void chooseSourceFileFromADialog();
 
-	std::string askUserForPathToOutputFile();
- 
-	std::string chooseTextFileFromDialog();
- 
-	std::string chooseFolderFromDialog();
+	void chooseTextFileFromDialog();
  
 	std::string askUserForNewFileName();
  
@@ -79,9 +75,9 @@ protected:
 	bool isError();
 
 
-	Gtk::Button startButton, exitButton, openChooseSourceFileDialog;
+	Gtk::Button startButton, exitButton, openChooseSourceFileDialog, openChooseOutcomeFileDialog;
 
-	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, helpLabel;
+	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, pathLabel;
 
 	Gtk::RadioButton doEncoding, doDecoding, readFromEntry, readFromFile, writeToTextBox, writeToFileAndTextBox;
 

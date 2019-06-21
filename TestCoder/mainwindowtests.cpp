@@ -32,22 +32,25 @@ TEST_CASE( "Labels are updated", "[MainWindowTests]" )
 	}
 }
 
-TEST_CASE("Shows helpLabel only when output to file is active")
+TEST_CASE("Shows helpLabel and button to choose output file only when output to file is active")
 {
 	MockWindow window;
-	SECTION("After creation label is hidden => textbox output mode")
+	SECTION("After creation label and button is hidden => textbox output mode")
 	{
 		CHECK(window.isHelpLabelVisible() == false);
+		CHECK(window.isOpenChooseOutcomeFileDialogVisible() == false);
 	}
 	window.setOutputToFile();
-	SECTION("In file&textbox output mode help label is visible")
+	SECTION("In file&textbox output mode help label and button is visible")
 	{
 		CHECK(window.isHelpLabelVisible() == true);
+		CHECK(window.isOpenChooseOutcomeFileDialogVisible() == true);
 	}
 	window.setOutputToTextbox();
-	SECTION("In textbox output mode help label is hidden")
+	SECTION("In textbox output mode help label and button is hidden")
 	{
 		CHECK(window.isHelpLabelVisible() == false);
+		CHECK(window.isOpenChooseOutcomeFileDialogVisible() == false);
 	}
 }
 
@@ -138,49 +141,61 @@ TEST_CASE("Recognises error state", "[MainWindowTests]")
 	MockWindow window;
 	window.setEntryInputMode();
 	
-	SECTION("When fields are filled after creation everything is okay")
-	{
-		CHECK(window.isError() == false);
-	}
-	window.writeToTextEntry("");
-	window.clickStartButton();
-	SECTION("Empty text field returns error")
-	{
-		CHECK(window.isError() == true);
-	}
-	window.writeToTextEntry("something");
-	window.writeToKeyEntry("");
-	window.clickStartButton();
-	SECTION("Empty key field returns error")
-	{
-		CHECK(window.isError() == true);
-	}
-	window.writeToKeyEntry("keyyyyy");
-	window.clickStartButton();
-	SECTION("After filling both fields again return ok")
+	SECTION("After creation everything is ok")
 	{
 		CHECK(window.isError() == false);
 	}
 	
-	window.setFileInputMode();
-	window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/file.txt");
-	window.clickStartButton();
-	SECTION("For filled exsisting file returns ok")
+	SECTION("For help label with default path alert in output to file mode returns error")
 	{
+		window.setOutputToFile();
+		CHECK(window.isError() == true);
+	}
+	
+	SECTION("For help label with path in output to file mode returns ok")
+	{
+		window.setOutputToFile();
+		window.setPathLabelText("/home/jacek/CLP/Coder/TestCoder/file.txt");
 		CHECK(window.isError() == false);
 	}
-	window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/emptyfile.txt");
-	window.clickStartButton();
+	
+	SECTION("Empty text field returns error")
+	{
+		window.writeToTextEntry("");
+		window.clickStartButton();
+		CHECK(window.isError() == true);
+	}
+	
+	SECTION("Empty key field returns error")
+	{
+		window.writeToKeyEntry("");
+		window.clickStartButton();
+		CHECK(window.isError() == true);
+	}
+	
+	window.setFileInputMode();
+	
+	SECTION("For filled exsisting file returns ok")
+	{
+		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/file.txt");
+		window.clickStartButton();
+		CHECK(window.isError() == false);
+	}
+	
 	SECTION("For empty exsisting file returns error")
 	{
+		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/emptyfile.txt");
+		window.clickStartButton();
 		CHECK(window.isError() == true);
 	}
-	window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/nofile.txt");
-	window.clickStartButton();
+	
 	SECTION("For non-exsisting file returns error")
 	{
+		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/nofile.txt");
+		window.clickStartButton();
 		CHECK(window.isError() == true);
 	}
+	
 }
 
 TEST_CASE("Prompts appropirate ErrorDialog message when something is not ok", "[MainWindowTests]")
@@ -197,21 +212,21 @@ TEST_CASE("Prompts appropirate ErrorDialog message when something is not ok", "[
 	{
 		window.writeToKeyEntry("");
 		window.clickStartButton();
-		CHECK(window.getMinorErrorMessage() == "Key entry is empty");
+		CHECK(window.getMinorErrorMessage() == "Key entry is empty\n");
 	}
 	SECTION("Minor message says that text entry in EntryInputMode is empty")
 	{
 		window.setEntryInputMode();
 		window.writeToTextEntry("");
 		window.clickStartButton();
-		CHECK(window.getMinorErrorMessage() == "Text entry is empty");
+		CHECK(window.getMinorErrorMessage() == "Text entry is empty\n");
 	}
 	SECTION("Minor message says that file in FileInputMode is empty or non-exsisting")
 	{
 		window.setFileInputMode();
 		window.writeToTextEntry("");
 		window.clickStartButton();
-		CHECK(window.getMinorErrorMessage() == "File is empty or it does not exsists");
+		CHECK(window.getMinorErrorMessage() == "File is empty or it does not exsists\n");
 	}
 	SECTION("Minor message says that file in FileInputMode is empty or non-exsisting and key entry is empty")
 	{
@@ -219,7 +234,7 @@ TEST_CASE("Prompts appropirate ErrorDialog message when something is not ok", "[
 		window.writeToTextEntry("");
 		window.writeToKeyEntry("");
 		window.clickStartButton();
-		CHECK(window.getMinorErrorMessage() == "Key entry is empty\nFile is empty or it does not exsists");
+		CHECK(window.getMinorErrorMessage() == "Key entry is empty\nFile is empty or it does not exsists\n");
 	}
 	SECTION("Minor message says that text entry in EntryInputMode is empty and key entry is empty")
 	{
@@ -227,7 +242,13 @@ TEST_CASE("Prompts appropirate ErrorDialog message when something is not ok", "[
 		window.writeToTextEntry("");
 		window.writeToKeyEntry("");
 		window.clickStartButton();
-		CHECK(window.getMinorErrorMessage() == "Key entry is empty\nText entry is empty");
+		CHECK(window.getMinorErrorMessage() == "Key entry is empty\nText entry is empty\n");
+	}
+	SECTION("Minor message says that text entry in EntryInputMode is empty and key entry is empty")
+	{
+		window.setPathLabelText("No path selected");
+		window.setOutputToFile();
+		CHECK(window.getMinorErrorMessage() == "No outcome file selected");
 	}
 }
 

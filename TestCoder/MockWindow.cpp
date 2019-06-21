@@ -17,7 +17,12 @@ bool MockWindow::isOpenChooseFileDialogVisible()
 	
 bool MockWindow::isHelpLabelVisible()
 	{
-		return helpLabel.get_visible();
+		return pathLabel.get_visible();
+	}
+	
+bool MockWindow::isOpenChooseOutcomeFileDialogVisible()
+	{
+		return openChooseOutcomeFileDialog.get_visible();
 	}
 	
 void MockWindow::writeToFile(std::string path, std::string text)
@@ -117,3 +122,8 @@ bool MockWindow::isError()
 	{
 		return MainWindow::isError();
 	}
+	
+void MockWindow::setPathLabelText(std::string text)
+{
+	pathLabel.set_text(text);
+}

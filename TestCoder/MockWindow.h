@@ -12,6 +12,7 @@ public:
 	
 	bool isOpenChooseFileDialogVisible();
 	bool isHelpLabelVisible();
+	bool isOpenChooseOutcomeFileDialogVisible();
 	
 	void writeToFile(std::string path, std::string text);
 	
@@ -33,6 +34,8 @@ public:
 	
 	void writeToTextEntry(std::string text);
 	bool hasTextEntryGoodText();
+	
+	void setPathLabelText(std::string text);
 	
 	std::string getTextInputText();
 	std::string getKeyInputText();

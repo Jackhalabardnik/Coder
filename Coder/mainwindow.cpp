@@ -15,7 +15,7 @@ void MainWindow::setGUI()
 		setOutInfo();
 
 		setButtons();
-		setHelpLabel();
+		setPathLabel();
 
 		setMainGrid();
 		fillMainGrid();
@@ -73,8 +73,8 @@ void MainWindow::setChooseOutputGrid()
 	writeToFileAndTextBox.set_label("File & Textbox");
 	writeToTextBox.set_label("Textbox");
 
-	writeToFileAndTextBox.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateHelpLabel));
-	writeToTextBox.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateHelpLabel));
+	writeToFileAndTextBox.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateOutcomeMode));
+	writeToTextBox.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateOutcomeMode));
 
 	writeToFileAndTextBox.join_group(writeToTextBox);
 	writeToTextBox.set_active();
@@ -127,11 +127,13 @@ void MainWindow::setButtons()
 	exitButton.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::close));
 	openChooseSourceFileDialog.set_label("...");
 	openChooseSourceFileDialog.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::chooseSourceFileFromADialog));
+	openChooseOutcomeFileDialog.set_label("...");
+	openChooseOutcomeFileDialog.signal_clicked().connect(sigc::mem_fun(*this,&MainWindow::chooseTextFileFromDialog));
 }
 
-void MainWindow::setHelpLabel()
+void MainWindow::setPathLabel()
 {
-	helpLabel.set_text("Click GO, then choose output file");
+	pathLabel.set_text("No path selected");
 }
 
 void MainWindow::setMainGrid()
@@ -157,10 +159,11 @@ void MainWindow::fillMainGrid()
 		mainGrid.attach(startButton, 2, 6, 4,1);
 
 		mainGrid.attach(outputEntryLabel,3,7,1,1);
-		mainGrid.attach(scrolledWindow,2, 8, 5,3);
+		mainGrid.attach(scrolledWindow,1, 8, 4,2);
+		mainGrid.attach(openChooseOutcomeFileDialog, 5,8,1,2);
 
 		mainGrid.attach(exitButton, 2, 12, 4,1);
-		mainGrid.attach(helpLabel, 1, 13, 4,1);
+		mainGrid.attach(pathLabel, 1, 13, 4,1);
 }
 
 void MainWindow::setWindow()
@@ -196,9 +199,10 @@ void MainWindow::updateInputTextLabel()
 	textEntryLabel.set_text(std::string("Enter " + input_text + " to " + code_method +":"));
 }
 
-void MainWindow::updateHelpLabel()
+void MainWindow::updateOutcomeMode()
 {
-	helpLabel.set_visible(writeToFileAndTextBox.get_active());
+	pathLabel.set_visible(writeToFileAndTextBox.get_active());
+	openChooseOutcomeFileDialog.set_visible(writeToFileAndTextBox.get_active());
 }
 
 void MainWindow::updateInputMode()
@@ -207,6 +211,7 @@ void MainWindow::updateInputMode()
 	updateInput();
 	updateWorkMode();
 }
+
 
 void MainWindow::updateInput()
 {
@@ -242,12 +247,7 @@ void MainWindow::doWork()
 		
 		if(writeToFileAndTextBox.get_active())
 		{
-			std::string path = askUserForPathToOutputFile();
-			
-			if(path.empty() == false)
-			{
-				writeToFile(path,output);
-			}
+			writeToFile(pathLabel.get_text(),output);
 		}
 	}
 }
@@ -260,7 +260,8 @@ void MainWindow::transferTextFromEntriesToInput()
 
 bool MainWindow::isError()
 {
-	return textInput->isInputGood() == false || keyInput.isInputGood() == false;
+	bool isPathNotSelected = writeToFileAndTextBox.get_active() && pathLabel.get_text() == "No path selected";
+	return textInput->isInputGood() == false || keyInput.isInputGood() == false || isPathNotSelected;
 }
 
 void MainWindow::showErrorDialog()
@@ -283,17 +284,14 @@ std::string MainWindow::getMajorErrorMessage()
 std::string MainWindow::getMinorErrorMessage()
 {
 		std::string message;
-		if(keyInput.isInputGood() == false)
-		{
-			message += "Key entry is empty";
-		}
+		message += keyInput.isInputGood() == false ? "Key entry is empty\n" : "";
 		if(textInput->isInputGood() == false)
 		{
-			if(message.size()>0)
-			{
-				message +="\n";
-			}
-			message += readFromEntry.get_active() ? "Text entry is empty" : "File is empty or it does not exsists";
+			message += readFromEntry.get_active() ? "Text entry is empty\n" : "File is empty or it does not exsists\n";
+		}
+		if(writeToFileAndTextBox.get_active())
+		{
+			message += pathLabel.get_text() == "No path selected" ? "No outcome file selected" : "";
 		}
 		return message;
 }
@@ -321,34 +319,15 @@ void MainWindow::chooseSourceFileFromADialog()
 	}
 }
 
-std::string MainWindow::askUserForPathToOutputFile()
-{
-	Gtk::MessageDialog dialog(*this, "Create new or choose exsisting file?", false, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_CANCEL,false);
-	dialog.add_button("Create new", 1);
-	dialog.add_button("Choose exsisting", 2);
-	int response = dialog.run();
-	std::string uri;
-	
-	if(response == 1)
-	{
-		chooseFolderFromDialog();
-		uri += askUserForNewFileName();
-	}
-	if(response == 2)
-	{
-		uri = chooseTextFileFromDialog();
-	}
-	helpLabel.set_text(uri);
-	return uri;
-}
 
-std::string MainWindow::chooseTextFileFromDialog()
+void MainWindow::chooseTextFileFromDialog()
 {
 	Gtk::FileChooserDialog dialog("Please choose a text file", Gtk::FILE_CHOOSER_ACTION_OPEN);
 	dialog.set_transient_for(*this);
 
 	dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
 	dialog.add_button("_Open", Gtk::RESPONSE_OK);
+	dialog.add_button("New File", 1);
 
 	auto filter_text = Gtk::FileFilter::create();
 	filter_text->set_name("Text files");
@@ -364,30 +343,19 @@ std::string MainWindow::chooseTextFileFromDialog()
 		uri = dialog.get_uri();
 		uri.erase(uri.begin(),uri.begin()+7);
 	}
-	return uri;
-}
- 
-std::string MainWindow::chooseFolderFromDialog()
-{
-	Gtk::FileChooserDialog dialog("Please choose a text file", Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
-	dialog.set_transient_for(*this);
-
-	dialog.add_button("_Cancel", Gtk::RESPONSE_CANCEL);
-	dialog.add_button("_Select", Gtk::RESPONSE_OK);
-	
-	int result = dialog.run();
-	
-	std::string uri;
-	
-	if(result == Gtk::ResponseType::RESPONSE_OK)
+	else if(result == 1)
 	{
-		uri = dialog.get_uri();
+		uri += dialog.get_current_folder_uri() + "/";
 		uri.erase(uri.begin(),uri.begin()+7);
+		uri += askUserForNewFileName();
 	}
-	return uri;
+	else
+	{
+		uri = "No path selected";
+	}
+	pathLabel.set_text(uri);
 }
- 
- 
+
 std::string MainWindow::askUserForNewFileName()
 {
 	Gtk::MessageDialog dialog(*this, "Type new file name", false, Gtk::MessageType::MESSAGE_OTHER, Gtk::BUTTONS_OK_CANCEL,false);
