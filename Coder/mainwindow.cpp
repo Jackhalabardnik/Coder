@@ -190,7 +190,7 @@ void MainWindow::setWindow()
 	set_border_width(10);
 	set_size_request(300,400);
 	set_resizable(false);
-	set_title("Coder v1.2.4");
+	set_title("Coder v1.3.0");
 }
 
 void MainWindow::showEverythingAtCreation()
