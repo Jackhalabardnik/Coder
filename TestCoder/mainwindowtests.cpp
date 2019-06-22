@@ -244,7 +244,7 @@ TEST_CASE("Prompts appropirate ErrorDialog message when something is not ok", "[
 		window.clickStartButton();
 		CHECK(window.getMinorErrorMessage() == "Key entry is empty\nText entry is empty\n");
 	}
-	SECTION("Minor message says that text entry in EntryInputMode is empty and key entry is empty")
+	SECTION("Minor message says that no outcome file is selected")
 	{
 		window.setPathLabelText("No path selected");
 		window.setOutputToFile();

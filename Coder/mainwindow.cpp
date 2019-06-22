@@ -212,7 +212,6 @@ void MainWindow::updateInputMode()
 	updateWorkMode();
 }
 
-
 void MainWindow::updateInput()
 {
 	if(readFromEntry.get_active())
@@ -376,7 +375,6 @@ std::string MainWindow::askUserForNewFileName()
 	
 	return uri;
 }
-
 
 void MainWindow::writeToFile(std::string path, std::string text)
 {
