@@ -27,6 +27,9 @@ public:
 	void setOutputToTextbox();
 	void setOutputToFile();
 	
+	void setOneTimeCoding();
+	void setRepetetiveCoding();
+	
 	void writeToTextInput(std::string text);
 	
 	void writeToKeyEntry(std::string text);

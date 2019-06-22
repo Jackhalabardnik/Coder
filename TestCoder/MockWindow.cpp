@@ -63,6 +63,15 @@ void MockWindow::setFileInputMode()
 		readFromFile.set_active();
 	}
 	
+void MockWindow::setOneTimeCoding()
+	{
+		codeOneTime.set_active();
+	}
+void MockWindow::setRepetetiveCoding()
+	{
+		codeRepetetive.set_active();
+	}
+	
 void MockWindow::writeToTextInput(std::string text)
 	{
 		textInput->setText(text);
