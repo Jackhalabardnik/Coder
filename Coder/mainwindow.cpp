@@ -163,7 +163,7 @@ void MainWindow::fillMainGrid()
 		mainGrid.attach(openChooseOutcomeFileDialog, 5,8,1,2);
 
 		mainGrid.attach(exitButton, 2, 12, 4,1);
-		mainGrid.attach(pathLabel, 1, 13, 4,1);
+		mainGrid.attach(pathLabel, 2, 13, 4,1);
 }
 
 void MainWindow::setWindow()
@@ -345,7 +345,10 @@ void MainWindow::chooseTextFileFromDialog()
 	else if(result == 1)
 	{
 		uri += dialog.get_current_folder_uri() + "/";
-		uri.erase(uri.begin(),uri.begin()+7);
+		if(uri.size()>7)
+		{
+			uri.erase(uri.begin(),uri.begin()+7);
+		}
 		uri += askUserForNewFileName();
 	}
 	else
