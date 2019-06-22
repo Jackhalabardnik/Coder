@@ -261,7 +261,7 @@ TEST_CASE("Prompts output to EntryOutput after clicking go button", "[MainWindow
 		window.writeToKeyEntry("KEY");
 		window.writeToTextEntry("TEXT");
 		window.clickStartButton();
-		CHECK(window.getOutputEntryText() == "\"j4\"");
+		CHECK(window.getOutputTextboxText() == "\"j4\"");
 	}
 	SECTION("Normal output after decoding input")
 	{
@@ -269,21 +269,21 @@ TEST_CASE("Prompts output to EntryOutput after clicking go button", "[MainWindow
 		window.writeToKeyEntry("KEY");
 		window.writeToTextEntry("\"j4\"");
 		window.clickStartButton();
-		CHECK(window.getOutputEntryText() == "TEXT");
+		CHECK(window.getOutputTextboxText() == "TEXT");
 	}
 	SECTION("Nothing is changed after encoding bad input")
 	{
 		window.setEncodingMode();
 		window.writeToTextEntry("");
 		window.clickStartButton();
-		CHECK(window.getOutputEntryText() == "Nothing here");
+		CHECK(window.getOutputTextboxText() == "Nothing here");
 	}
 	SECTION("Normal output after decoding bad input")
 	{
 		window.setDecodingMode();
 		window.writeToTextEntry("");
 		window.clickStartButton();
-		CHECK(window.getOutputEntryText() == "Nothing here");
+		CHECK(window.getOutputTextboxText() == "Nothing here");
 	}
 }
 
@@ -323,5 +323,31 @@ TEST_CASE("Writes to file coded text, path is always good", "[MainWindowTests]")
 		window.writeToFile("/home/jacek/CLP/Coder/TestCoder/writeFile.txt", test_2);
 		input.setText("/home/jacek/CLP/Coder/TestCoder/writeFile.txt");
 		CHECK(input.getText() == test_2);
+	}
+}
+
+TEST_CASE("Repetetive coding works", "[MainWindowTests]")
+{
+	MockWindow window;
+	window.setRepetetiveCoding();
+	SECTION("Codes text, and after that codes result till change of given text in repetetive mode")
+	{
+		window.clickStartButton();
+		window.clickStartButton();
+		CHECK(window.getOutputTextboxText() == "P5pP");
+	}
+	window.setOneTimeCoding();
+	SECTION("Codes text once in one time mode")
+	{
+		window.clickStartButton();
+		window.clickStartButton();
+		CHECK(window.getOutputTextboxText() == "bMtb");
+	}
+	SECTION("User codes text once and then he goes to repetetive mode")
+	{
+		window.clickStartButton();
+		window.setRepetetiveCoding();
+		window.clickStartButton();
+		CHECK(window.getOutputTextboxText() == "P5pP");
 	}
 }

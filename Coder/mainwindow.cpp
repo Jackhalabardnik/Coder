@@ -261,6 +261,14 @@ void MainWindow::doWork()
 	{
 		std::string key = keyInput.getText();
 		std::string text = textInput->getText();
+		if(text != previousText)
+		{
+			previousText = text;
+		}
+		else if(codeRepetetive.get_active())
+		{
+			text = outputTextView.get_buffer()->get_text();
+		}
 		std::string output = doEncoding.get_active() ? codingService.encode(text,key) : codingService.decode(text,key);
 		setTextToTextBuffer(output);
 		
@@ -337,7 +345,6 @@ void MainWindow::chooseSourceFileFromADialog()
 		textEntry.set_text(uri);
 	}
 }
-
 
 void MainWindow::chooseTextFileFromDialog()
 {

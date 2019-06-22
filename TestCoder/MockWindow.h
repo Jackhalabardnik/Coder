@@ -42,7 +42,7 @@ public:
 	
 	std::string getTextInputText();
 	std::string getKeyInputText();
-	std::string getOutputEntryText();
+	std::string getOutputTextboxText();
 
 	std::string getTextEntryLabelText();
 	

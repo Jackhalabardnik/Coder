@@ -107,7 +107,7 @@ std::string MockWindow::getKeyInputText()
 		return keyInput.getText();
 	}
 
-std::string MockWindow::getOutputEntryText()
+std::string MockWindow::getOutputTextboxText()
 	{
 		return outputTextView.get_buffer()->get_text();
 	}

@@ -99,6 +99,8 @@ protected:
 	FileInput textInputFileMode;
 
 	CodingService codingService;
+	
+	std::string previousText;
 };
 
 #endif
