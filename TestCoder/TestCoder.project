@@ -9,7 +9,7 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="mainwindowtests.cpp"/>
-    <File Name="CatchMain.cpp"/>
+    <File Name="CatchMain.cpp" ExcludeProjConfig=""/>
     <File Name="entryinputtests.cpp"/>
     <File Name="fileinputtests.cpp"/>
     <File Name="MockWindow.cpp"/>

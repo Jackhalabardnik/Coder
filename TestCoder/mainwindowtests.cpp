@@ -63,7 +63,7 @@ TEST_CASE("Updates InputInterferance", "[MainWindowTests]" )
 		CHECK(window.getTextInputText() == "message");
 	}
 	window.setFileInputMode();
-	window.writeToTextInput("/home/jacek/CLP/Coder/TestCoder/file.txt");
+	window.writeToTextInput("file.txt");
 	SECTION("InputInterferance changes to FileInput mode after click => returnes file text")
 	{
 		CHECK(window.getTextInputText() == "Some text\nSome texts");
@@ -118,7 +118,7 @@ TEST_CASE("TextInput workflow works", "[MainWindowTests]")
 		CHECK(window.getTextInputText() == "abcd");
 	}
 	window.setFileInputMode();
-	window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/file.txt");
+	window.writeToTextEntry("file.txt");
 	window.clickStartButton();
 	SECTION("TextInput returns file text from path set to textEntry")
 	{
@@ -128,7 +128,7 @@ TEST_CASE("TextInput workflow works", "[MainWindowTests]")
 	{
 		CHECK(window.hasTextEntryGoodText() == true);
 	}
-	window.writeToTextEntry("/home/file.txt");
+	window.writeToTextEntry("/nonononooon-+/file.txt");
 	window.clickStartButton();
 	SECTION("TextInput returns false when given non-existing file")
 	{
@@ -155,7 +155,7 @@ TEST_CASE("Recognises error state", "[MainWindowTests]")
 	SECTION("For help label with path in output to file mode returns ok")
 	{
 		window.setOutputToFile();
-		window.setPathLabelText("/home/jacek/CLP/Coder/TestCoder/file.txt");
+		window.setPathLabelText("file.txt");
 		CHECK(window.isError() == false);
 	}
 	
@@ -177,21 +177,21 @@ TEST_CASE("Recognises error state", "[MainWindowTests]")
 	
 	SECTION("For filled exsisting file returns ok")
 	{
-		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/file.txt");
+		window.writeToTextEntry("file.txt");
 		window.clickStartButton();
 		CHECK(window.isError() == false);
 	}
 	
 	SECTION("For empty exsisting file returns error")
 	{
-		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/emptyfile.txt");
+		window.writeToTextEntry("emptyfile.txt");
 		window.clickStartButton();
 		CHECK(window.isError() == true);
 	}
 	
 	SECTION("For non-exsisting file returns error")
 	{
-		window.writeToTextEntry("/home/jacek/CLP/Coder/TestCoder/nofile.txt");
+		window.writeToTextEntry("nofile.txt");
 		window.clickStartButton();
 		CHECK(window.isError() == true);
 	}
@@ -314,14 +314,14 @@ TEST_CASE("Writes to file coded text, path is always good", "[MainWindowTests]")
 	std::string test_2 = "Repetetive\n but\n true";
 	SECTION("Test if write method erases file before writting")
 	{
-		window.writeToFile("/home/jacek/CLP/Coder/TestCoder/writeFile.txt", test_1);
-		input.setText("/home/jacek/CLP/Coder/TestCoder/writeFile.txt");
+		window.writeToFile("writeFile.txt", test_1);
+		input.setText("writeFile.txt");
 		CHECK(input.getText() == test_1);
 	}
 	SECTION("Test if write method writes enters")
 	{
-		window.writeToFile("/home/jacek/CLP/Coder/TestCoder/writeFile.txt", test_2);
-		input.setText("/home/jacek/CLP/Coder/TestCoder/writeFile.txt");
+		window.writeToFile("writeFile.txt", test_2);
+		input.setText("writeFile.txt");
 		CHECK(input.getText() == test_2);
 	}
 }

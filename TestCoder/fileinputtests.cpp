@@ -9,27 +9,27 @@ TEST_CASE("Basic FileInput workflow works", "[FileInputTests]")
 	{
 		CHECK(input.isInputGood() == false);
 	}
-	input.setText("/home/jacek/CLP/Coder/TestCoder/file.txt");
+	input.setText("file.txt");
 	SECTION("For exsisting and non-empty file returns true")
 	{
 		CHECK(input.isInputGood() == true);
 	}
-	input.setText("/home/jacek/CLP/Coder/TestCoder/emptyfile.txt");
+	input.setText("emptyfile.txt");
 	SECTION("For exsisting and empty file returns false")
 	{
 		CHECK(input.isInputGood() == false);
 	}
-	input.setText("/home/jacek/CLP/Coder/TestCoder/nofile.txt");
+	input.setText("nofile.txt");
 	SECTION("For non-exsisting file returns false")
 	{
 		CHECK(input.isInputGood() == false);
 	}
-	input.setText("/home/jacek/CLP/Coder/TestCoder/hardfile.txt");
+	input.setText("hardfile.txt");
 	SECTION("Returnes file text in line")
 	{
 		CHECK(input.getText() == "Simple but true");
 	}
-	input.setText("/home/jacek/CLP/Coder/TestCoder/file.txt");
+	input.setText("file.txt");
 	SECTION("Returnes file text with enters")
 	{
 		CHECK(input.getText() == "Some text\nSome texts");
@@ -42,12 +42,12 @@ TEST_CASE("Basic FileInput workflow works", "[FileInputTests]")
 	{
 		CHECK(input.getText() == "Some text\nSome texts");
 	}
-	input.setText("/home/jacek/CLP/Coder/TestCoder/emptyfile.txt");
+	input.setText("emptyfile.txt");
 	SECTION("When given empty file returns empty string")
 	{
 		CHECK(input.getText() == "");
 	}
-	input.setText("/home/jacek/CLP/Coder/TestCoder/nofile.txt");
+	input.setText("nofile.txt");
 	SECTION("When given non-exsisting file returns empty string")
 	{
 		CHECK(input.getText() == "");
