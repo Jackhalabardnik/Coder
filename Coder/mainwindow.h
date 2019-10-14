@@ -27,6 +27,8 @@ private:
 	
 	void setChooseRepetetiveGrid();
 
+	void setChooseCodeTypeGrid();
+
 	void setEntry();
 
 	void setInputInterferance();
@@ -82,7 +84,8 @@ protected:
 	Gtk::Label outputEntryLabel, keyEntryLabel, textEntryLabel, pathLabel;
 
 	Gtk::RadioButton doEncoding, doDecoding, readFromEntry, readFromFile,
-	writeToTextBox, writeToFileAndTextBox, codeOneTime, codeRepetetive;
+	writeToTextBox, writeToFileAndTextBox, codeOneTime, codeRepetetive,
+	codeTypeRSA, codeTypeReplace;
 
 	Gtk::Entry keyEntry, textEntry;
 
@@ -90,7 +93,7 @@ protected:
 
 	Gtk::ScrolledWindow scrolledWindow;
 
-	Gtk::Grid mainGrid, chooseInputGrid, chooseOutputGrid, chooseMethodGrid, chooseRepetetiveGrid;
+	Gtk::Grid mainGrid, chooseInputGrid, chooseOutputGrid, chooseMethodGrid, chooseRepetetiveGrid, chooseCodeTypeGrid;
 
 	std::shared_ptr<InputInterferance> textInput;
 

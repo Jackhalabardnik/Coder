@@ -11,6 +11,7 @@ void MainWindow::setGUI()
 		setChooseInputGrid();
 		setChooseOutputGrid();
 		setChooseRepetetiveGrid();
+		setChooseCodeTypeGrid();
 		setEntry();
 		setInputInterferance();
 		setOutInfo();
@@ -104,6 +105,24 @@ void MainWindow::setChooseRepetetiveGrid()
 	chooseRepetetiveGrid.attach_next_to(codeRepetetive, codeOneTime,Gtk::PositionType::POS_BOTTOM ,1,1);
 }
 
+void MainWindow::setChooseCodeTypeGrid()
+{
+	auto label = Gtk::manage(new Gtk::Label("ChooseCodeType: "));
+	
+	codeTypeRSA.set_label("RSA ");
+	codeTypeReplace.set_label("Replacing ");
+
+	codeTypeReplace.join_group(codeTypeRSA);
+	codeTypeRSA.set_active();
+
+	chooseCodeTypeGrid.set_row_spacing(3);
+
+	chooseCodeTypeGrid.attach(*label, 0,0,1,1);
+	chooseCodeTypeGrid.attach_next_to(codeTypeRSA, *label,Gtk::PositionType::POS_BOTTOM ,1,1);
+	chooseCodeTypeGrid.attach_next_to(codeTypeReplace, codeTypeRSA,Gtk::PositionType::POS_BOTTOM ,1,1);
+
+}
+
 void MainWindow::setEntry()
 {
 	keyEntryLabel.set_text("Enter your key:"); 
@@ -164,24 +183,25 @@ void MainWindow::setMainGrid()
 
 void MainWindow::fillMainGrid()
 {
-		mainGrid.attach(keyEntryLabel, 1, 1,5,1);
-		mainGrid.attach(keyEntry,1, 2, 5,1);
-		mainGrid.attach(textEntryLabel,1,3, 5,1);
-		mainGrid.attach(textEntry,1,4,5,1);
-		mainGrid.attach(openChooseSourceFileDialog, 6,4,1,1);
+		mainGrid.attach(keyEntryLabel, 1, 1,6,1);
+		mainGrid.attach(keyEntry,1, 2, 6,1);
+		mainGrid.attach(textEntryLabel,1,3, 6,1);
+		mainGrid.attach(textEntry,1,4,6,1);
+		mainGrid.attach(openChooseSourceFileDialog, 7,4,1,1);
 
 		mainGrid.attach(chooseMethodGrid,2,5,1,1);
 		mainGrid.attach(chooseInputGrid,3, 5, 1, 1);
 		mainGrid.attach(chooseOutputGrid,4, 5, 1, 1);
 		mainGrid.attach(chooseRepetetiveGrid,5, 5, 1, 1);
+		mainGrid.attach(chooseCodeTypeGrid,6, 5, 1, 1);
 
-		mainGrid.attach(startButton, 2, 6, 4,1);
+		mainGrid.attach(startButton, 2, 6, 5,1);
 
-		mainGrid.attach(outputEntryLabel,1,7,5,1);
-		mainGrid.attach(scrolledWindow,1, 8, 5,3);
-		mainGrid.attach(openChooseOutcomeFileDialog, 6,8,1,3);
+		mainGrid.attach(outputEntryLabel,1,7,6,1);
+		mainGrid.attach(scrolledWindow,1, 8, 6,3);
+		mainGrid.attach(openChooseOutcomeFileDialog, 7,8,1,3);
 
-		mainGrid.attach(exitButton, 2, 12, 4,1);
+		mainGrid.attach(exitButton, 2, 12, 5,1);
 		mainGrid.attach(pathLabel, 1, 13, 6,1);
 }
 
@@ -208,6 +228,7 @@ void MainWindow::showEverythingAtCreation()
 	chooseInputGrid.show_all();
 	chooseOutputGrid.show_all();
 	chooseRepetetiveGrid.show_all();
+	chooseCodeTypeGrid.show_all();
 	mainGrid.show();
 	show();
 }
@@ -413,3 +434,4 @@ void MainWindow::writeToFile(std::string path, std::string text)
 	stream << text << "\n";
 	stream.close();
 }
+
