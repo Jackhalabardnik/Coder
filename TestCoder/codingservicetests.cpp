@@ -1,11 +1,11 @@
 #include <catch.hpp>
 #include <iostream>
 
-#include <Coder/CodingService.cpp>
+#include <Coder/CaesarCoding.cpp>
 
-TEST_CASE("Coding service codes given text", "[CodingServiceTests]")
+TEST_CASE("Caesar Coding service codes given text", "[CodingServiceTests]")
 {
-	CodingService service;
+	CaesarCoding service;
 	SECTION("Encoding")
 	{
 		CHECK(service.encode("TEXT", "KEY") == "\"j4\"");

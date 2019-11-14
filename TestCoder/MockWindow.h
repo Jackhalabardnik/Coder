@@ -1,5 +1,4 @@
-#ifndef MOCK_WINDOW_H
-#define MOCK_WINDOW_H
+#pragma once
 
 #include <string>
 #include "Coder/mainwindow.h"
@@ -51,5 +50,3 @@ public:
 	
 	bool isError();
 };
-
-#endif

@@ -12,14 +12,15 @@
     <File Name="InputInterferance.h"/>
     <File Name="EntryInput.h"/>
     <File Name="FileInput.h"/>
-    <File Name="CodingService.h"/>
+    <File Name="CodingInterface.h"/>
+    <File Name="CaesarCoding.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="mainwindow.cpp" ExcludeProjConfig=""/>
     <File Name="main.cpp"/>
     <File Name="EntryInput.cpp"/>
     <File Name="FileInput.cpp"/>
-    <File Name="CodingService.cpp"/>
+    <File Name="CaesarCoding.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

@@ -1,5 +1,4 @@
-#ifndef ENTRY_INPUT_H
-#define ENTRY_INPUT_H
+#pragma once
 
 #include <InputInterferance.h>
 
@@ -14,5 +13,3 @@ public:
 private:
 	std::string enteredText;
 };
-
-#endif

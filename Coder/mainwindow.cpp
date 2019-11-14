@@ -23,6 +23,8 @@ void MainWindow::setGUI()
 		fillMainGrid();
 
 		setWindow();
+		
+		updateCodingMethod();
 
 		showEverythingAtCreation();
 }
@@ -114,6 +116,9 @@ void MainWindow::setChooseCodeTypeGrid()
 
 	codeTypeReplace.join_group(codeTypeRSA);
 	codeTypeRSA.set_active();
+
+	codeTypeReplace.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateCodingMethod));
+	codeTypeRSA.signal_toggled().connect(sigc::mem_fun(*this, &MainWindow::updateCodingMethod));
 
 	chooseCodeTypeGrid.set_row_spacing(3);
 
@@ -253,6 +258,12 @@ void MainWindow::updateInputMode()
 	updateWorkMode();
 }
 
+
+void MainWindow::updateCodingMethod()
+{
+	codingService = std::make_shared<CaesarCoding>();
+}
+
 void MainWindow::updateInput()
 {
 	if(readFromEntry.get_active())
@@ -290,7 +301,7 @@ void MainWindow::doWork()
 		{
 			text = outputTextView.get_buffer()->get_text();
 		}
-		std::string output = doEncoding.get_active() ? codingService.encode(text,key) : codingService.decode(text,key);
+		std::string output = doEncoding.get_active() ? codingService->encode(text,key) : codingService->decode(text,key);
 		setTextToTextBuffer(output);
 		
 		if(writeToFileAndTextBox.get_active())

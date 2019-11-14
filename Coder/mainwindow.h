@@ -1,13 +1,13 @@
-#ifndef GTKMM_MAINWINDOW_H
-#define GTKMM_MAINWINDOW_H
+#pragma once
 
 #include <gtkmm.h>
 #include <string>
 #include <memory>
-#include <InputInterferance.h>
+
 #include <EntryInput.h>
 #include <FileInput.h>
-#include <CodingService.h>
+#include <CodingInterface.h>
+#include <CaesarCoding.h>
 
 class MainWindow : public Gtk::Window
 {
@@ -46,6 +46,8 @@ private:
 	void setWindow();
 
 	void showEverythingAtCreation();
+
+	void updateCodingMethod();
 
 	void updateInputMode();
 
@@ -101,9 +103,9 @@ protected:
 
 	FileInput textInputFileMode;
 
-	CodingService codingService;
+	std::shared_ptr<CodingInterface> codingService;
+
+	CaesarCoding cesearCoding;
 	
 	std::string previousText;
 };
-
-#endif

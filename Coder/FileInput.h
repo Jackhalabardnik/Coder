@@ -1,5 +1,4 @@
-#ifndef FILE_INPUT_H
-#define FILE_INPUT_H
+#pragma once
 
 #include <InputInterferance.h>
 #include <fstream>
@@ -18,5 +17,3 @@ private:
 	bool hasOpenedSth = false;
 	std::string sum; 
 };
-
-#endif
