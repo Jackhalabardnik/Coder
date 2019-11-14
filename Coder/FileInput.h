@@ -1,9 +1,9 @@
 #pragma once
 
-#include <InputInterferance.h>
+#include <InputInterface.h>
 #include <fstream>
 
-class FileInput : public InputInterferance
+class FileInput : public InputInterface
 {
 	public:
 	FileInput() = default;

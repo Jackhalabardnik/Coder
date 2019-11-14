@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/fileinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/MockWindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/codingservicetests.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/mainwindowtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/CatchMain.cpp$(ObjectSuffix) $(IntermediateDirectory)/entryinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/fileinputtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/MockWindow.cpp$(ObjectSuffix) $(IntermediateDirectory)/ceasarcodingtests.cpp$(ObjectSuffix) $(IntermediateDirectory)/rsacodingtests.cpp$(ObjectSuffix) 
 
 
 
@@ -131,13 +131,21 @@ $(IntermediateDirectory)/MockWindow.cpp$(DependSuffix): MockWindow.cpp
 $(IntermediateDirectory)/MockWindow.cpp$(PreprocessSuffix): MockWindow.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/MockWindow.cpp$(PreprocessSuffix) MockWindow.cpp
 
-$(IntermediateDirectory)/codingservicetests.cpp$(ObjectSuffix): codingservicetests.cpp $(IntermediateDirectory)/codingservicetests.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/TestCoder/codingservicetests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/codingservicetests.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/codingservicetests.cpp$(DependSuffix): codingservicetests.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/codingservicetests.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/codingservicetests.cpp$(DependSuffix) -MM codingservicetests.cpp
+$(IntermediateDirectory)/ceasarcodingtests.cpp$(ObjectSuffix): ceasarcodingtests.cpp $(IntermediateDirectory)/ceasarcodingtests.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/TestCoder/ceasarcodingtests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ceasarcodingtests.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ceasarcodingtests.cpp$(DependSuffix): ceasarcodingtests.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ceasarcodingtests.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ceasarcodingtests.cpp$(DependSuffix) -MM ceasarcodingtests.cpp
 
-$(IntermediateDirectory)/codingservicetests.cpp$(PreprocessSuffix): codingservicetests.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/codingservicetests.cpp$(PreprocessSuffix) codingservicetests.cpp
+$(IntermediateDirectory)/ceasarcodingtests.cpp$(PreprocessSuffix): ceasarcodingtests.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ceasarcodingtests.cpp$(PreprocessSuffix) ceasarcodingtests.cpp
+
+$(IntermediateDirectory)/rsacodingtests.cpp$(ObjectSuffix): rsacodingtests.cpp $(IntermediateDirectory)/rsacodingtests.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/jacek/CLP/Coder/TestCoder/rsacodingtests.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/rsacodingtests.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/rsacodingtests.cpp$(DependSuffix): rsacodingtests.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/rsacodingtests.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/rsacodingtests.cpp$(DependSuffix) -MM rsacodingtests.cpp
+
+$(IntermediateDirectory)/rsacodingtests.cpp$(PreprocessSuffix): rsacodingtests.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/rsacodingtests.cpp$(PreprocessSuffix) rsacodingtests.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)

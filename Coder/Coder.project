@@ -9,11 +9,12 @@
   <Dependencies/>
   <VirtualDirectory Name="include">
     <File Name="mainwindow.h"/>
-    <File Name="InputInterferance.h"/>
     <File Name="EntryInput.h"/>
     <File Name="FileInput.h"/>
     <File Name="CodingInterface.h"/>
     <File Name="CaesarCoding.h"/>
+    <File Name="InputInterface.h"/>
+    <File Name="RSACoding.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="mainwindow.cpp" ExcludeProjConfig=""/>
@@ -21,6 +22,7 @@
     <File Name="EntryInput.cpp"/>
     <File Name="FileInput.cpp"/>
     <File Name="CaesarCoding.cpp"/>
+    <File Name="RSACoding.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>

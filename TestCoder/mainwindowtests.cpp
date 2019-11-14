@@ -54,23 +54,23 @@ TEST_CASE("Shows helpLabel and button to choose output file only when output to 
 	}
 }
 
-TEST_CASE("Updates InputInterferance", "[MainWindowTests]" )
+TEST_CASE("Updates InputInterface", "[MainWindowTests]" )
 {
 	MockWindow window;
 	window.writeToTextInput("message");
-	SECTION("InputInterferance is set on EntryInput after construction => returnes set text")
+	SECTION("InputInterface is set on EntryInput after construction => returnes set text")
 	{
 		CHECK(window.getTextInputText() == "message");
 	}
 	window.setFileInputMode();
 	window.writeToTextInput("file.txt");
-	SECTION("InputInterferance changes to FileInput mode after click => returnes file text")
+	SECTION("InputInterface changes to FileInput mode after click => returnes file text")
 	{
 		CHECK(window.getTextInputText() == "Some text\nSome texts");
 	}
 	window.setEntryInputMode();
 	window.writeToTextInput("AMEN");
-	SECTION("InputInterferance changes to EntryInput mode after click => returnes set text")
+	SECTION("InputInterface changes to EntryInput mode after click => returnes set text")
 	{
 		CHECK(window.getTextInputText() == "AMEN");
 	}

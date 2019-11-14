@@ -1,5 +1,5 @@
 #include <catch.hpp>
-#include <Coder/InputInterferance.h>
+#include <Coder/InputInterface.h>
 #include <Coder/FileInput.cpp>
 
 TEST_CASE("Basic FileInput workflow works", "[FileInputTests]")

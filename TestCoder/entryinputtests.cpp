@@ -1,5 +1,5 @@
 #include <catch.hpp>
-#include <Coder/InputInterferance.h>
+#include <Coder/InputInterface.h>
 #include <Coder/EntryInput.cpp>
 
 TEST_CASE("Basic EntryInput workflow works","[EntryInputTests]")

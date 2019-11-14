@@ -97,7 +97,7 @@ protected:
 
 	Gtk::Grid mainGrid, chooseInputGrid, chooseOutputGrid, chooseMethodGrid, chooseRepetetiveGrid, chooseCodeTypeGrid;
 
-	std::shared_ptr<InputInterferance> textInput;
+	std::shared_ptr<InputInterface> textInput;
 
 	EntryInput keyInput, textInputEntryMode;
 

@@ -1,8 +1,8 @@
 #pragma once
 
-#include <InputInterferance.h>
+#include <InputInterface.h>
 
-class EntryInput : public InputInterferance
+class EntryInput : public InputInterface
 {
 public:
 	EntryInput() = default;

@@ -13,7 +13,8 @@
     <File Name="entryinputtests.cpp"/>
     <File Name="fileinputtests.cpp"/>
     <File Name="MockWindow.cpp"/>
-    <File Name="codingservicetests.cpp"/>
+    <File Name="ceasarcodingtests.cpp"/>
+    <File Name="rsacodingtests.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug"/>
   <Dependencies Name="Release"/>
